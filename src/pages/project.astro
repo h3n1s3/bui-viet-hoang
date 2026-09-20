@@ -1,0 +1,9 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { projects } from '../data/profile';
+import { ArrowUpRight } from '@lucide/astro';
+---
+<Layout title="Project" active="project">
+ <section class="page-intro research-intro"><h1 class="page-title">&lt;Project /&gt;</h1></section>
+ <div class="research-grid grid grid-cols-1 md:grid-cols-2 gap-5">{projects.map(p=><article class="research-card hud-card"><a class="card-link" href={p.url} target="_blank" rel="noopener noreferrer"><div class="hud-top"><span class="hud-id">{p.id}</span><span class="hud-type">OPEN SOURCE</span></div><div class="card-body"><h2 class="card-title">{p.title}</h2><p class="card-description">{p.description}</p><div class="hud-tags">{p.tags.join(' / ')}</div><div class="card-bottom"><span class="muted">Source on GitHub</span><span class="card-read-more">OPEN <ArrowUpRight size={16}/></span></div></div></a></article>)}</div>
+</Layout>

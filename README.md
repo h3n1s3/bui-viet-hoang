@@ -1,6 +1,6 @@
 # Bui Viet Hoang — security research
 
-A minimal, dark personal website with three sections: **Home**, **Research**, and **About**. Research is authored in Markdown or MDX. Fonts and syntax highlighting are served locally; there is no CMS, analytics, external font request, or client framework runtime.
+A minimal, dark personal website with three sections: **Home**, **Research**, and **Project**. Research is authored in Markdown or MDX. Fonts and syntax highlighting are served locally; there is no CMS, analytics, external font request, or client framework runtime.
 
 The repository already used Astro, so it stays on Astro rather than migrating to Next.js. Astro's content collections, TypeScript, MDX integration and Shiki provide the requested static publishing workflow with very little browser JavaScript. Tailwind CSS provides layout utilities; a single stylesheet defines the pixel/terminal visual system. Lucide provides interface icons.
 
@@ -24,7 +24,7 @@ npm run preview # Serve the production build locally
 
 ## Personal information
 
-Edit `src/lib/site.ts` for the name, handle, role, GitHub and optional email. Edit `src/pages/about.astro` for the biography and interests. The initial name comes from the repository name; no email, certifications, CVEs or employment history have been invented. Confirm the introduction before publishing.
+Edit `src/lib/site.ts` for the name, handle, role, GitHub and optional email. Edit `src/pages/index.astro` for the About Me section and interests. Social links, certifications and projects live in `src/data/profile.ts`. The initial name comes from the repository name; social URLs and email were supplied by the owner; no certifications, CVEs or employment history have been invented. Confirm the introduction before publishing.
 
 All four bundled notes are marked `sample: true`. Three preserve the original Vietnamese sample content; the CSS note is an English demonstration of the new article layout. Replace them with your own research, or set `draft: true` to hide them. The sample flag displays a small label and an article notice; it does **not** hide a post.
 
@@ -58,7 +58,7 @@ The evidence and its limitations.
 What you learned.
 ```
 
-The filename becomes `/research/my-research/`. Nested folders are supported. Published entries automatically appear on Research, on Home (two newest), in RSS and in the sitemap. `draft: true` excludes the route and all public listings in development and production. Dates are displayed in UTC and sorted newest first.
+The filename becomes `/research/my-research/`. Nested folders are supported. Published entries automatically appear on Research, in RSS and in the sitemap. `draft: true` excludes the route and all public listings in development and production. Dates are displayed in UTC and sorted newest first.
 
 Supported frontmatter: `title`, `date`, `description`, `tags`, `category` (`blog` or `writeup`, defaults to `blog`), optional `updated`, `draft`, `sample`, `lang` (`en` or `vi`), `cover` and `coverAlt`. A schema validates metadata at build time. No layout field is needed.
 
@@ -93,7 +93,7 @@ Shiki highlights code at build time. A transformer adds the macOS window dots, f
 - Base: `/bui-viet-hoang/`
 - Output: `dist/`
 
-The old, incorrect `/thpt-2026/` hardcoding has been removed. Within this site's base, `/blog/`, the three old article URLs, and `/cv/` have static redirects to their replacements. Redirects use HTML refresh because GitHub Pages does not support server-side redirects.
+The old, incorrect `/thpt-2026/` hardcoding has been removed. Within this site's base, `/blog/`, the three old article URLs, `/about/` and `/cv/` have static redirects to their replacements. Redirects use HTML refresh because GitHub Pages does not support server-side redirects.
 
 The existing GitHub Pages workflow deploys pushes to `main`; enable **GitHub Actions** as the Pages source in repository settings. Pull requests run checks and a build without deploying.
 
@@ -109,6 +109,16 @@ For a custom domain or another static host, set `SITE_URL` to the production ori
 - `src/plugins/code-window.ts` — Shiki window transformer
 - `src/styles/global.css` — typography, colors and responsive layout
 
-Visual direction is inspired by [Pxilg's blog](https://pxilg.com/blog/), with black surfaces, pixel typography, two-column terminal cards, a static binary backdrop and an original ASCII shield. Research includes Blog/Writeup filters. A theme toggle remembers the chosen light/dark theme locally; dark is the default.
+Visual direction is inspired by [Pxilg's blog](https://pxilg.com/blog/), with black surfaces, pixel typography, two-column clipped HUD cards, a dim animated digital matrix and a character-based Elaina portrait. Research includes Blog/Writeup filters. A theme toggle remembers the chosen light/dark theme locally; dark is the default.
 
 Pixel headings use VCR OSD Neue by Elli Sho, distributed as 100% Free with author credit requested ([font source](https://www.dafont.com/vcrosdneue.font), see public/fonts/NOTICE.md). Vietnamese headings use VT323 by Peter Hull for complete accents. Article body text uses Inter and code uses JetBrains Mono. All fonts are served locally.
+
+## Home, motion and credentials
+
+Home fills the first viewport with the introduction and ASCII portrait, followed by data-driven counts, Certifications and About Me. `/about/` and `/cv/` redirect to Home's `#about` anchor. `/project/` lists published projects. Social icon links use owner-provided destinations; the supplied Hack The Box URL is the platform profile landing page, not an individual profile ID.
+
+Add certificate entries in `src/data/profile.ts` with `title`, `issuer`, `date`, `image` (public path), and optional verification `url`. The horizontal carousel supports previous/next controls and automatic scrolling; it pauses on hover, keyboard focus, offscreen, hidden tabs and reduced motion. No credentials have been supplied, so the section currently displays an honest empty state. Counts are calculated from the content, including explicitly marked sample notes.
+
+Matrix streams, hair, HUD scan lines, blinking terminal cursors and scroll reveals are restrained. Use the footer's Pause motion button to pause animation across pages. The browser's reduced-motion preference always wins. TOC links have an animated active state and the boxed sidebar includes reading progress.
+
+The portrait is literal SVG text, generated offline from `src/assets/elaina-source.png` into `src/data/elaina-ascii.json`. The image is not downloaded by website visitors. Regenerate with `node scripts/build-ascii.mjs`. The two hair layers move independently; the face remains still. Artwork preparation and prompts are documented in `docs/artwork.md`.

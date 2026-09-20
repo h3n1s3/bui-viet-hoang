@@ -5,17 +5,18 @@ import '@fontsource/vt323/400.css';
 import { Sun, Moon } from '@lucide/astro';
 import BinaryBackdrop from '../components/BinaryBackdrop.astro';
 import '../styles/global.css';
+import Motion from '../components/Motion.astro';
 import { profile, withBase } from '../lib/site';
 interface Props {
   title?: string;
   description?: string;
-  active?: 'home' | 'research' | 'about';
+  active?: 'home' | 'research' | 'project';
   article?: boolean;
   lang?: string;
 }
 const { title = profile.name, description = profile.description, active = 'home', article = false, lang = 'en' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const navigation = [{ label: 'Home', path: '', key: 'home' }, { label: 'Research', path: 'research/', key: 'research' }, { label: 'About', path: 'about/', key: 'about' }];
+const navigation = [{ label: 'Home', path: '', key: 'home' }, { label: 'Research', path: 'research/', key: 'research' }, { label: 'Project', path: 'project/', key: 'project' }];
 ---
 <!doctype html>
 <html lang={lang} data-theme="dark">
@@ -50,7 +51,8 @@ const navigation = [{ label: 'Home', path: '', key: 'home' }, { label: 'Research
     <footer class="site-footer" lang="en">
       <BinaryBackdrop />
       <div class="footer-inner shell"><p class="copyright">© {new Date().getFullYear()} {profile.name}. All rights reserved.</p><div class="footer-links"><a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href={withBase('rss.xml')}>RSS ↗</a></div></div>
-    </footer>
+    <button class="motion-toggle" data-motion-toggle hidden>Pause motion</button><p class="font-credit">Pixel type: <a href="https://www.dafont.com/vcrosdneue.font" target="_blank" rel="noopener noreferrer">VCR OSD Neue / Elli Sho</a> · VT323 / Peter Hull</p></footer>
+    <Motion />
   </body>
 </html>
 <script>

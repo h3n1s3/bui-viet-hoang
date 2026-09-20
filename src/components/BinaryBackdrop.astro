@@ -1,9 +1,8 @@
 ---
 interface Props { hero?: boolean }
 const { hero = false } = Astro.props;
-const seed = '01101000 00110011 01101110 00110001 01110011 00110011 ';
-const rows = Array.from({ length: hero ? 12 : 3 }, (_, i) => `${seed.slice(i)}${seed.repeat(8)}`);
+let seed = 317;
+const bit = () => { seed = (Math.imul(seed,1664525)+1013904223) >>> 0; return seed>>>30&1; };
+const streams = Array.from({length:40},(_,i)=>({text:Array.from({length:32},bit).join('\n'),delay:-(i*1.7),duration:18+(i%7)*3}));
 ---
-<div class:list={['binary-backdrop', { 'binary-hero': hero }]} aria-hidden="true">
-  {rows.map(row => <div>{row}</div>)}
-</div>
+<div class:list={['matrix-backdrop', {'matrix-hero':hero}]} aria-hidden="true">{streams.map((s,i)=><span style={`--x:${i*2.6}%;--delay:${s.delay}s;--duration:${s.duration}s;--depth:${i%3===0?.65:.3}`}>{s.text}</span>)}</div>

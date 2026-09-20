@@ -1,31 +1,31 @@
 ---
-import { CodeXml, ArrowUpRight, BookOpen } from '@lucide/astro';
+import { ArrowDown, ArrowUpRight } from '@lucide/astro';
 import Layout from '../layouts/Layout.astro';
-import ResearchList from '../components/ResearchList.astro';
 import BinaryBackdrop from '../components/BinaryBackdrop.astro';
-import AsciiShield from '../components/AsciiShield.astro';
+import AsciiPortrait from '../components/AsciiPortrait.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import Certifications from '../components/Certifications.astro';
 import { profile, withBase } from '../lib/site';
 import { getResearch } from '../lib/research';
+import { certifications, projects } from '../data/profile';
 const posts = await getResearch();
 ---
 <Layout>
-  <section class="home-intro">
-    <BinaryBackdrop hero />
-    <div class="hero-copy">
-      <p class="hero-name">Hi, I'm {profile.name}.</p>
-      <h1>&lt;{profile.handle} /&gt;</h1>
-      <p class="hero-statement">I research, build and break things<br />in cybersecurity.</p>
-      <p class="hero-role">{profile.role}</p>
-      <div class="hero-links flex flex-wrap items-center justify-center gap-4">
-        <a class="primary-link" href={withBase('research/')}><BookOpen size={18} aria-hidden="true" />Research <ArrowUpRight size={16} aria-hidden="true" /></a>
-        <a class="social-link" href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub profile"><CodeXml size={21} aria-hidden="true" /></a>
-      </div>
-    </div>
-    <AsciiShield />
-  </section>
-  <section class="latest-section" aria-labelledby="latest-heading">
-    <div class="section-heading"><h2 id="latest-heading">&lt;Latest Research /&gt;</h2></div>
-    {posts.length ? <ResearchList posts={posts.slice(0, 2)} /> : <p class="empty-state">Research notes are on the way.</p>}
-    <a class="all-research" href={withBase('research/')}>View all research <ArrowUpRight size={17} aria-hidden="true" /></a>
-  </section>
+ <section class="home-intro hero-expanded">
+  <BinaryBackdrop hero />
+  <div class="hero-copy"><p class="hero-name">Hi, I'm {profile.name}.</p><h1>&lt;{profile.handle} /&gt;<span class="terminal-cursor" aria-hidden="true">_</span></h1><p class="hero-statement">I research, build and break things<br/>in cybersecurity.</p><p class="hero-role">{profile.role}</p><SocialLinks/></div>
+  <AsciiPortrait/>
+  <a class="scroll-cue" href="#overview">SCROLL TO EXPLORE <ArrowDown size={16} aria-hidden="true"/></a>
+ </section>
+ <section class="home-stats reveal" id="overview" aria-label="Website overview">
+  <div><strong>{String(posts.length).padStart(2,'0')}</strong><span>RESEARCH NOTES</span><small>includes sample articles</small></div>
+  <div><strong>{String(posts.filter(p=>p.data.category==='writeup').length).padStart(2,'0')}</strong><span>WRITEUPS</span><small>CTF & lab notes</small></div>
+  <div><strong>{String(certifications.length).padStart(2,'0')}</strong><span>CERTIFICATIONS</span><small>public credentials</small></div>
+  <div><strong>{String(projects.length).padStart(2,'0')}</strong><span>PROJECTS</span><small>open source & experiments</small></div>
+ </section>
+ <Certifications/>
+ <section id="about" class="home-section home-about reveal" aria-labelledby="about-heading">
+  <div class="section-heading"><h2 id="about-heading">&lt;About Me /&gt;</h2></div>
+  <div class="about-grid"><div><p class="command about-command"><span class="terminal-cursor" aria-hidden="true">$</span> whoami</p><h3>{profile.name}<span class="muted"> / {profile.handle}</span></h3><p>I'm interested in the space between how a system is designed and how it actually behaves. I research, build and break things in cybersecurity, then write down what I learn.</p><SocialLinks/></div><div class="about-focus"><section><span>01 / CURRENT INTERESTS</span><h3>Web application security</h3><p>Authentication, access control and the root causes of vulnerabilities.</p></section><section><span>02 / CTF & RESEARCH</span><h3>Question. Build. Reproduce.</h3><p>Small test cases, reproducible observations and a notebook of lessons learned.</p><a class="text-link" href={withBase('research/')}>Explore research <ArrowUpRight size={16}/></a></section></div></div>
+ </section>
 </Layout>

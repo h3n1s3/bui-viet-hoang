@@ -22,7 +22,8 @@ export default defineConfig({
     '/blog/access-control': destination('research/access-control/'),
     '/blog/disclosure': destination('research/disclosure/'),
     '/blog/lab-notes': destination('research/lab-notes/'),
-    '/cv': destination('about/'),
+    '/cv': destination('#about'),
+    '/about': destination('#about'),
   },
   markdown: {
     processor: unified({

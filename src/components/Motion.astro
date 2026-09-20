@@ -1,0 +1,13 @@
+<script>
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ const targets=document.querySelectorAll<HTMLElement>('.reveal, .matrix-backdrop, .elaina-art');
+ const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{entry.target.classList.toggle('in-view',entry.isIntersecting);if(entry.isIntersecting&&entry.target.classList.contains('reveal'))observer.unobserve(entry.target);}),{threshold:.08});
+ targets.forEach(target=>{if(target.classList.contains('reveal')&&!reduced.matches)target.classList.add('reveal-ready');observer.observe(target);});
+ const button=document.querySelector<HTMLButtonElement>('[data-motion-toggle]');
+ if(button){
+  button.hidden=false;
+  try{if(localStorage.getItem('motion')==='paused')document.documentElement.dataset.motion='paused';}catch{}
+  const sync=()=>{const paused=document.documentElement.dataset.motion==='paused';button.textContent=paused?'Resume motion':'Pause motion';button.setAttribute('aria-pressed',String(paused));};
+  sync();button.addEventListener('click',()=>{const state=document.documentElement.dataset.motion==='paused'?'running':'paused';document.documentElement.dataset.motion=state;try{localStorage.setItem('motion',state);}catch{}sync();});
+ }
+</script>
