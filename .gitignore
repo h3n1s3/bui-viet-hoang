@@ -5,3 +5,5 @@ dist/
 work/
 outputs/
 _tmp_*.ps1
+.playwright-cli/
+output/

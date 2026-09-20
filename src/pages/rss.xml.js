@@ -1,2 +1,0 @@
-import rss from '@astrojs/rss';
-export function GET(context){const posts=Object.values(import.meta.glob('./blog/*.md',{eager:true}));return rss({title:'Security Field Notes',description:'Vulnerability research, pentest & field notes.',site:context.site,items:posts.map(p=>({title:p.frontmatter.title,pubDate:new Date(p.frontmatter.date),description:p.frontmatter.description,link:p.url,categories:p.frontmatter.tags})),customData:'<language>vi</language>'});}

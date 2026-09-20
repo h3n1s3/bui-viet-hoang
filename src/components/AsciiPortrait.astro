@@ -1,0 +1,9 @@
+---
+import layers from '../data/elaina-ascii.json';
+---
+<figure class="elaina-art" aria-label="Elaina illustrated in ASCII characters">
+  <svg viewBox="-24 -24 888 1536" role="img" aria-labelledby="elaina-title" preserveAspectRatio="xMaxYMid meet">
+    <title id="elaina-title">Elaina — ASCII portrait</title>
+    {Object.entries(layers).map(([name,rows]) => <g aria-hidden="true" class={`ascii-${name}`} fill="currentColor" font-family="'Courier New', monospace" font-size="10" xml:space="preserve">{rows.map((row,index)=><text x="0" y={index*12+10}>{row}</text>)}</g>)}
+  </svg>
+</figure>

@@ -1,5 +1,6 @@
 ---
-layout: ../../layouts/Article.astro
+sample: true
+lang: vi
 title: "From finding to disclosure: ghi chép một lỗ hổng"
 date: 2026-09-08
 updated: 2026-09-11

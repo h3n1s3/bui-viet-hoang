@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { ArrowUpRight } from '@lucide/astro';
+import { formatDate, withBase } from '../lib/site';
+interface Props { posts: CollectionEntry<'research'>[]; headingLevel?: 'h2' | 'h3' }
+const { posts, headingLevel: Heading = 'h3' } = Astro.props;
+---
+<div class="research-grid grid grid-cols-1 md:grid-cols-2 gap-5">
+  {posts.map((post,index) => (
+    <article class="research-card hud-card" data-category={post.data.category} lang={post.data.lang}>
+      <a class="card-link" href={withBase(`research/${post.id}/`)} aria-labelledby={`post-${post.id}`}>
+        <div class="hud-top"><span class="hud-id">{post.data.category==='writeup'?'WR':'RS'}-{String(posts.length-index).padStart(3,'0')}</span><span class="hud-type">{post.data.category}</span></div>
+        <div class="card-body">
+          <Heading class="card-title" id={`post-${post.id}`}>{post.data.title}<span class="terminal-cursor title-cursor" aria-hidden="true">_</span></Heading>
+          <p class="card-description">{post.data.description}</p>
+          <div class="hud-tags" aria-label="Article tags">{post.data.tags.join(' / ')}</div>
+          <div class="card-bottom"><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time><span class="card-read-more" lang="en">READ <ArrowUpRight size={16} aria-hidden="true" /></span></div>
+          {post.data.sample && <span class="sample-label" lang="en">Sample note</span>}
+        </div>
+      </a>
+    </article>
+  ))}
+</div>

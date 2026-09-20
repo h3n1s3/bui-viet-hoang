@@ -1,0 +1,43 @@
+---
+import { Pause, Play } from '@lucide/astro';
+import { certificationSamples, certifications } from '../data/profile';
+import { withBase } from '../lib/site';
+const preview = certifications.length === 0;
+const items = preview ? certificationSamples : certifications;
+const loops = [items, items];
+---
+<section class="home-section certifications-section reveal" aria-labelledby="certifications-heading">
+  <div class="section-heading"><h2 id="certifications-heading">&lt;Certifications /&gt;</h2></div>
+  <div class="certificate-marquee" data-certificate-marquee>
+    <div class="certificate-heading">
+      <p>{preview ? 'SAMPLE LAYOUT — REPLACE WITH YOUR CERTIFICATES' : `${certifications.length} PUBLIC CREDENTIALS`}</p>
+      <button type="button" class="certificate-pause" aria-label="Pause certificate carousel" aria-pressed="false" data-certificate-pause>
+        <Pause class="pause-icon" size={15} aria-hidden="true"/><Play class="play-icon" size={15} aria-hidden="true"/>
+      </button>
+    </div>
+    <div class="certificate-viewport" aria-label={preview ? 'Sample certificate design carousel' : 'Certifications'}>
+      <div class="certificate-loop">
+        {loops.map((group, groupIndex) => <div class="certificate-group" aria-hidden={groupIndex === 1 ? 'true' : undefined}>
+          {group.map(c => <article class="certificate-item">
+            {c.url ? <a class="certificate-link" href={c.url} target="_blank" rel="noopener noreferrer" tabindex={groupIndex === 1 ? -1 : undefined}>
+              <img src={withBase(c.image)} alt={groupIndex === 0 ? `${c.title} certificate` : ''} loading="lazy"/>
+              <div class="certificate-label"><span>{c.date}</span><strong>{c.title}</strong><small>{c.issuer} · VERIFY ↗</small></div>
+            </a> : <>
+              <img src={withBase(c.image)} alt={groupIndex === 0 ? `${c.title}${preview ? ' sample certificate design' : ' certificate'}` : ''} loading="lazy"/>
+              <div class="certificate-label"><span>{c.date}</span><strong>{c.title}</strong><small>{c.issuer}</small></div>
+            </>}
+          </article>)}
+        </div>)}
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  const marquee = document.querySelector<HTMLElement>('[data-certificate-marquee]');
+  const pauseButton = marquee?.querySelector<HTMLButtonElement>('[data-certificate-pause]');
+  pauseButton?.addEventListener('click', () => {
+    const paused = marquee?.classList.toggle('is-paused') ?? false;
+    pauseButton.setAttribute('aria-pressed', String(paused));
+    pauseButton.setAttribute('aria-label', `${paused ? 'Resume' : 'Pause'} certificate carousel`);
+  });
+</script>

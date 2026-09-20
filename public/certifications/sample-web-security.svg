@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Sample web security certificate</title>
+  <desc id="desc">A terminal-inspired cyber certificate mockup labeled sample and not a real credential.</desc>
+  <defs>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <rect x="1" y="1" width="3" height="3" fill="#b9ff66" fill-opacity=".12"/>
+    </pattern>
+    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b9ff66" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#b9ff66" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="760" fill="#040605"/>
+  <path d="M0 0H1200V760H0Z" fill="url(#dots)"/>
+  <path d="M770 0H1200V430Z" fill="url(#beam)"/>
+  <rect x="28" y="28" width="1144" height="704" fill="none" stroke="#3b4d3e" stroke-width="2"/>
+  <path d="M28 104H1172" stroke="#3b4d3e" stroke-width="2"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace">
+    <g transform="translate(62 60)">
+      <rect width="14" height="14" fill="#f3cb55"/><rect x="26" width="14" height="14" fill="#b9ff66"/><rect x="52" width="14" height="14" fill="#526353"/>
+    </g>
+    <text x="158" y="75" fill="#9bad9e" font-size="16">credential-preview.sh</text>
+    <text x="1136" y="75" fill="#b9ff66" font-size="16" text-anchor="end">[ DEMO MODE ]</text>
+
+    <text x="70" y="158" fill="#b9ff66" font-size="18">guest@portfolio:~$</text>
+    <text x="286" y="158" fill="#e7f1e8" font-size="18">render --credential sample</text>
+    <text x="70" y="220" fill="#7b8e7e" font-size="15" letter-spacing="4">PRACTICE TRACK / 02</text>
+    <text x="70" y="292" fill="#e7f1e8" font-size="59" font-weight="800">WEB SECURITY</text>
+    <text x="70" y="338" fill="#f3cb55" font-size="21" letter-spacing="5">CONTROLLED LAB SERIES</text>
+
+    <rect x="70" y="390" width="692" height="154" fill="#071008" stroke="#526353" stroke-width="2"/>
+    <text x="98" y="429" fill="#526353" font-size="14">OUTPUT</text>
+    <text x="98" y="469" fill="#e7f1e8" font-size="22">PORTFOLIO PLACEHOLDER</text>
+    <text x="98" y="506" fill="#9bad9e" font-size="15">completed a fictional, non-verifiable demo course</text>
+    <rect x="640" y="424" width="80" height="80" fill="#b9ff66"/>
+    <path d="M661 465h38M680 446v38" stroke="#050706" stroke-width="8"/>
+
+    <g transform="translate(884 198)">
+      <path d="M0 0H246V346H0Z" fill="#071008" stroke="#b9ff66" stroke-width="3"/>
+      <path d="M24 52H222M24 294H222" stroke="#526353" stroke-width="2"/>
+      <text x="24" y="34" fill="#b9ff66" font-size="13">SAMPLE_TOKEN</text>
+      <g fill="none" stroke="#b9ff66" stroke-width="6">
+        <path d="M123 91 180 124v66l-57 33-57-33v-66Z"/>
+        <path d="M96 150h54M123 123v54"/>
+      </g>
+      <text x="123" y="266" fill="#e7f1e8" font-size="18" text-anchor="middle" letter-spacing="5">DEMO</text>
+      <text x="123" y="322" fill="#f3cb55" font-size="12" text-anchor="middle">NO VALIDATION DATA</text>
+    </g>
+
+    <path d="M70 608H1130" stroke="#3b4d3e" stroke-width="2" stroke-dasharray="8 10"/>
+    <text x="70" y="656" fill="#f3cb55" font-size="18" font-weight="700" letter-spacing="3">NOT A REAL CREDENTIAL</text>
+    <text x="1130" y="656" fill="#7b8e7e" font-size="15" text-anchor="end">SAMPLE-0002 / 00.00.0000</text>
+    <text x="70" y="698" fill="#526353" font-size="13">$ status: interface demonstration only</text>
+  </g>
+
+  <text x="550" y="490" fill="#e7f1e8" fill-opacity=".025" font-family="ui-monospace, Consolas, monospace" font-size="142" font-weight="900" text-anchor="middle" transform="rotate(-20 550 490)">SAMPLE</text>
+</svg>
