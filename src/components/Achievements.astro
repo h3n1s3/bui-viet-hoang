@@ -1,6 +1,6 @@
 ---
 import { ctfAchievements, securityAchievements, socials } from '../data/profile';
-const patchstack = 'https://patchstack.com/database/researchers/e2b27fb5-836f-4e3e-8ae7-9a8c92082c69';
+const patchstack = socials.find(({ icon }) => icon === 'patchstack')?.url;
 const htb = socials.find(({ icon }) => icon === 'htb')?.url;
 ---
 <section id="achievements" class="home-section achievements reveal" aria-labelledby="achievements-heading">
@@ -14,7 +14,7 @@ const htb = socials.find(({ icon }) => icon === 'htb')?.url;
     {item.credit && <p class="achievement-credit">{item.credit}</p>}
     {item.advisoryUrl && <a class="text-link" href={item.advisoryUrl} target="_blank" rel="noopener noreferrer">{item.advisoryLabel ?? 'Read advisory'} ↗</a>}
    </article>)}
-   <a class="text-link" href={patchstack} target="_blank" rel="noopener noreferrer">Patchstack researcher profile ↗</a>
+   {patchstack && <a class="text-link" href={patchstack} target="_blank" rel="noopener noreferrer">Patchstack researcher profile ↗</a>}
   </section>
   <section aria-labelledby="ctf-achievements"><p class="eyebrow">{String(ctfAchievements.length).padStart(2, '0')} / COMPETITIONS & PRACTICE</p><h3 id="ctf-achievements">CTF<span class="terminal-cursor" aria-hidden="true">_</span></h3>
    {ctfAchievements.length ? ctfAchievements.map(item => <article class="achievement-entry"><div class="achievement-meta">{item.date && <time datetime={item.date}>{item.dateLabel ?? item.date}</time>}</div><h4>{item.title}</h4><p>{item.description}</p>{item.url && <a class="text-link" href={item.url} target="_blank" rel="noopener noreferrer">{item.linkLabel ?? 'View result'} ↗</a>}</article>) : <p class="ctf-note">CTF writeups, competition results and milestones will be collected here.</p>}

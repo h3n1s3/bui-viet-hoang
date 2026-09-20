@@ -26,7 +26,7 @@ npm run preview # Serve the production build locally
 
 Edit `src/lib/site.ts` for the name, handle, role and GitHub profile. Edit `src/pages/index.astro` for the About Me section and interests. Social links, certifications, vulnerability disclosures, CTF milestones and projects live in `src/data/profile.ts`. The initial name comes from the repository name; social URLs and email were supplied by the owner; no certifications or employment history have been invented. Confirm the introduction before publishing.
 
-See [docs/content-management.md](docs/content-management.md) for a Vietnamese, copy-paste guide to adding posts, writeups, certificates, CVEs, pending reports, CTF results, projects and profile links, plus the publishing workflow.
+See [GUIDE.md](GUIDE.md) for the complete Vietnamese, copy-paste guide to running the site, editing the profile, adding posts, writeups, certificates, CVEs, pending reports, CTF results and projects, and publishing through GitHub Pages.
 
 All four bundled notes are marked `sample: true`. Three preserve the original Vietnamese sample content; the CSS note is an English demonstration of the new article layout. Replace them with your own research, or set `draft: true` to hide them. The sample flag displays a small label and an article notice; it does **not** hide a post.
 
