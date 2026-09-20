@@ -1,9 +1,46 @@
 ---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
 import '../styles/global.css';
-import '../styles/security.css';
-import 'katex/dist/katex.min.css';
-const {title='Security Research — Red Team & Pentest',description='Nghiên cứu lỗ hổng, coordinated disclosure và ghi chép kỹ thuật trên hành trình Red Team / Pentest.',active='home'}=Astro.props;
-const root='/thpt-2026/';
-const canonical=new URL(Astro.url.pathname,Astro.site);
+import { profile, withBase } from '../lib/site';
+interface Props {
+  title?: string;
+  description?: string;
+  active?: 'home' | 'research' | 'about';
+  article?: boolean;
+  lang?: string;
+}
+const { title = profile.name, description = profile.description, active = 'home', article = false, lang = 'en' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const navigation = [{ label: 'Home', path: '', key: 'home' }, { label: 'Research', path: 'research/', key: 'research' }, { label: 'About', path: 'about/', key: 'about' }];
 ---
-<!doctype html><html lang="vi"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content={description}/><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/><title>{title}</title><link rel="canonical" href={canonical}/><meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/><meta property="og:type" content={active==='article'?'article':'website'}/><link rel="icon" type="image/svg+xml" href={`${root}favicon.svg`}/><link rel="alternate" type="application/rss+xml" title="Security Field Notes" href={`${root}rss.xml`}/><script is:inline>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{}</script></head><body><a class="skip" href="#main">Bỏ qua điều hướng</a><header><a class="wordmark" href={root}>research<span>.</span></a><nav aria-label="Điều hướng chính"><a class:list={{selected:active==='home'}} href={root}>About</a><a class:list={{selected:active==='blog'||active==='article'}} href={`${root}blog/`}>Writing</a><a href={`${root}#research`}>Research</a><a href={`${root}#projects`}>Notebook</a><a href={`${root}#contact`}>Contact</a></nav><button class="theme" aria-label="Chuyển giao diện sáng hoặc tối" title="Đổi giao diện">◐</button></header><main id="main"><slot/></main><footer><span>© {new Date().getFullYear()} Security Research</span><span>Stay curious. <a href={`${root}rss.xml`}>RSS ↗</a></span></footer><script>document.querySelector('.theme')?.addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=theme;try{localStorage.setItem('theme',theme)}catch{}});</script></body></html>
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#11151c" />
+    <meta name="description" content={description} />
+    <title>{title === profile.name ? `${title} — Security Research` : `${title} — ${profile.name}`}</title>
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+    <link rel="alternate" type="application/rss+xml" title={`${profile.name} — Research`} href={withBase('rss.xml')} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header shell">
+      <a class="wordmark" href={withBase()} aria-label={`${profile.name}, home`}>{profile.handle}<span aria-hidden="true">_</span></a>
+      <nav aria-label="Main navigation">{navigation.map(item => <a href={withBase(item.path)} aria-current={active === item.key ? 'page' : undefined}>{item.label}</a>)}</nav>
+    </header>
+    <main id="main" class="shell" tabindex="-1"><slot /></main>
+    <footer class="site-footer shell">
+      <span>© {new Date().getFullYear()} {profile.name}</span>
+      <div><a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a><a href={withBase('rss.xml')}>RSS <span aria-hidden="true">↗</span></a></div>
+    </footer>
+  </body>
+</html>

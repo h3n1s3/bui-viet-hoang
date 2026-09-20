@@ -1,0 +1,59 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import { getResearch, readingTime } from '../../lib/research';
+import { formatDate, withBase } from '../../lib/site';
+import 'katex/dist/katex.min.css';
+export async function getStaticPaths() {
+  return (await getResearch()).map(post => ({ params: { id: post.id }, props: { post } }));
+}
+interface Props { post: CollectionEntry<'research'> }
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+const cover = post.data.cover?.startsWith('/') ? withBase(post.data.cover) : post.data.cover;
+---
+<Layout title={post.data.title} description={post.data.description} active="research" article lang={post.data.lang}>
+  <header class="article-header">
+    <a class="back-link" href={withBase('research/')}><span aria-hidden="true">←</span> All research</a>
+    <div class="article-meta"><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time><span aria-hidden="true">/</span><span>{readingTime(post.body)} min read</span></div>
+    <h1>{post.data.title}</h1><p class="article-description">{post.data.description}</p>
+    <div class="tags">{post.data.tags.map(tag => <span>{tag}</span>)}</div>
+    {post.data.updated && <p class="updated">Updated {formatDate(post.data.updated)}</p>}
+  </header>
+  <div class="article-layout">
+    <TableOfContents headings={headings} />
+    <article class="article-content">
+      {post.data.sample && <p class="sample-notice">Sample research note — illustrative content, not a claim of an original discovery or published vulnerability.</p>}
+      {cover && <img class="article-cover" src={cover} alt={post.data.coverAlt ?? ''} />}
+      <Content />
+      <div class="article-end"><span aria-hidden="true">∎</span><a href={withBase('research/')}>Back to research <span aria-hidden="true">↗</span></a></div>
+    </article>
+  </div>
+</Layout>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-code]').forEach(button => {
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+      const container = button.closest('.code-window');
+      const code = container?.querySelector('pre code');
+      const status = container?.querySelector<HTMLElement>('[data-copy-status]');
+      if (!code || !status) return;
+      button.disabled = true;
+      try {
+        await navigator.clipboard.writeText(code.textContent ?? '');
+        button.textContent = 'Copied!';
+        status.textContent = 'Code copied to clipboard.';
+      } catch {
+        button.textContent = 'Select code';
+        status.textContent = 'Clipboard unavailable. Code selected; use your keyboard to copy.';
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+      }
+      window.setTimeout(() => { button.textContent = 'Copy'; button.disabled = false; status.textContent = ''; }, 2200);
+    });
+  });
+</script>

@@ -1,0 +1,48 @@
+---
+import type { MarkdownHeading } from 'astro';
+interface Props { headings: MarkdownHeading[] }
+const headings = Astro.props.headings.filter(heading => heading.depth === 2 || heading.depth === 3);
+---
+{headings.length > 0 && <aside class="toc-aside"><details class="toc" open data-toc><summary>On this page <span aria-hidden="true">+</span></summary><nav aria-label="Table of contents"><ol>{headings.map(heading => <li class:list={{ 'toc-nested': heading.depth === 3 }}><a href={`#${heading.slug}`} data-toc-link>{heading.text}</a></li>)}</ol></nav></details></aside>}
+<script>
+  const toc = document.querySelector<HTMLDetailsElement>('[data-toc]');
+  if (toc) {
+    const desktop = matchMedia('(min-width: 960px)');
+    const syncLayout = () => { toc.open = desktop.matches; };
+    syncLayout();
+    desktop.addEventListener('change', syncLayout);
+    const links = [...toc.querySelectorAll<HTMLAnchorElement>('[data-toc-link]')];
+    const sections = links.map(link => document.getElementById(decodeURIComponent(link.hash.slice(1))));
+    let current = -1;
+    function updateActive() {
+      let next = 0;
+      sections.forEach((section, index) => { if (section && section.getBoundingClientRect().top <= 140) next = index; });
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8) next = links.length - 1;
+      if (next === current) return;
+      current = next;
+      links.forEach((link, index) => { if (index === next) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current'); });
+    }
+    let scheduled = false;
+    const scheduleUpdate = () => {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(() => { updateActive(); scheduled = false; });
+    };
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
+    window.addEventListener('load', scheduleUpdate);
+    new ResizeObserver(scheduleUpdate).observe(document.querySelector('.article-content')!);
+    links.forEach((link, index) => link.addEventListener('click', event => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const target = sections[index];
+      if (!target) return;
+      event.preventDefault();
+      if (!desktop.matches) toc.open = false;
+      history.pushState(null, '', link.hash);
+      target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+      target.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    }));
+    updateActive();
+  }
+</script>

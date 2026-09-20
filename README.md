@@ -1,32 +1,111 @@
-# Security Research — personal CV & Markdown blog
+# Bui Viet Hoang — security research
 
-Astro static site. Profile fields and all posts are explicitly draft/sample content. Replace them with verified personal information before sharing publicly.
+A minimal, dark personal website with three sections: **Home**, **Research**, and **About**. Research is authored in Markdown or MDX. Fonts and syntax highlighting are served locally; there is no CMS, analytics, external font request, or client framework runtime.
 
-## Run
+The repository already used Astro, so it stays on Astro rather than migrating to Next.js. Astro's content collections, TypeScript, MDX integration and Shiki provide the requested static publishing workflow with very little browser JavaScript. Styling is plain CSS in one file rather than adding Tailwind for a small site.
 
-`npm install`, then `npm run dev`. Build with `npm run build`; `dist/` is the static deployment output.
+## Development
 
-## Profile
+Use Node.js 24 (matching CI).
 
-Edit `src/pages/index.astro` and `src/pages/cv.astro`. Add verified CVEs with their product, disclosure date and advisory URL. Do not infer CVSS or discovery credit. Replace the avatar with your own image including alt text. Add your real social/contact URLs. Once your PDF is available, place it at `public/cv.pdf` and change the CV link to a download link.
-
-## New article
-
-Create a `.md` file in `src/pages/blog/`:
-
-```yaml
----
-layout: ../../layouts/Article.astro
-title: "Article title"
-date: 2026-09-11
-updated: 2026-09-11
-tags: [Pentest]
-description: "Brief summary"
-cover: /your-image.webp
-coverAlt: "Meaningful image description"
----
+```sh
+npm ci
+npm run dev
 ```
 
-Use `##` headings for the automatic table of contents, fenced code blocks with a language, and `$...$` / `$$...$$` for math. Images go in `public/`. `cover` and `coverAlt` are optional. Articles automatically appear in search, tag filters and RSS. Remove or conditionalize the sample notice in `Article.astro` for your real posts.
+Open `http://127.0.0.1:4321/bui-viet-hoang/`.
 
-Set the production origin in `astro.config.mjs` before deploying to a different host. Astro generates HTML, syntax highlighting, KaTeX, RSS and sitemap at build time. Light/dark preference is saved on the reader's device. No CMS, tracking or account is required.
+```sh
+npm run check    # TypeScript and Astro diagnostics
+npm test         # Markdown, code-window, anchor and base-path regression tests
+npm run build   # Static output in dist/
+npm run preview # Serve the production build locally
+```
+
+## Personal information
+
+Edit `src/lib/site.ts` for the name, handle, role, GitHub and optional email. Edit `src/pages/about.astro` for the biography and interests. The initial name comes from the repository name; no email, certifications, CVEs or employment history have been invented. Confirm the introduction before publishing.
+
+All four bundled notes are marked `sample: true`. Three preserve the original Vietnamese sample content; the CSS note is an English demonstration of the new article layout. Replace them with your own research, or set `draft: true` to hide them. The sample flag displays a small label and an article notice; it does **not** hide a post.
+
+## Write a research article
+
+Create `content/research/my-research.md` (or `.mdx`):
+
+```md
+---
+title: 'A descriptive research title'
+date: 2026-09-20
+description: 'A short summary for the research index and search previews.'
+tags: [Web Security, CTF]
+draft: false
+lang: en
+---
+
+Opening paragraph.
+
+## Background
+
+The question you investigated.
+
+### A closer look
+
+The evidence and its limitations.
+
+## Conclusion
+
+What you learned.
+```
+
+The filename becomes `/research/my-research/`. Nested folders are supported. Published entries automatically appear on Research, on Home (three newest), in RSS and in the sitemap. `draft: true` excludes the route and all public listings in development and production. Dates are displayed in UTC and sorted newest first.
+
+Supported frontmatter: `title`, `date`, `description`, `tags`, optional `updated`, `draft`, `sample`, `lang` (`en` or `vi`), `cover` and `coverAlt`. A schema validates metadata at build time. No layout field is needed.
+
+### Markdown and MDX
+
+Normal headings, bold, italics, links, images, lists, tables, quotes, inline code and fenced code blocks work without custom components. Existing `$...$` and `$$...$$` math is preserved through KaTeX. The migrated `lab-notes.mdx` demonstrates the MDX pipeline.
+
+Put images in `public/`, then use `![Descriptive alt text](/image.svg)`. Root-relative Markdown images and links are automatically prefixed with the configured base path. For optional article covers, use `cover: /image.svg` with a meaningful `coverAlt`. When writing raw HTML or MDX components, use the correct base path yourself; the Markdown path plugin only processes Markdown links and images.
+
+### Automatic table of contents
+
+`##` and `###` headings generate the TOC, using the exact anchors generated by Astro. Duplicate and Unicode headings are supported. On desktop the TOC is sticky and follows the current section. Below 960px it becomes a collapsed disclosure above the article. Anchor navigation respects reduced-motion preferences. Without JavaScript, the expanded TOC and normal anchor links still work.
+
+### Code windows
+
+Specify a language after the opening fence. Optionally add a quoted `title` or `filename`:
+
+````md
+```python title="example.py"
+def can_read(user, note):
+    return user is not None and user['id'] == note['owner_id']
+```
+````
+
+Shiki highlights code at build time. A transformer adds the macOS window dots, filename or language label, keyboard-scrollable code region and copy control. Fences without a language fall back to plain text. Long lines scroll inside the code window. Copy reports success or selects the code if clipboard access is unavailable; code remains readable with JavaScript disabled.
+
+## Deployment and old URLs
+
+`astro.config.mjs` defaults to:
+
+- Site: `https://h3n1s3.github.io`
+- Base: `/bui-viet-hoang/`
+- Output: `dist/`
+
+The old, incorrect `/thpt-2026/` hardcoding has been removed. Within this site's base, `/blog/`, the three old article URLs, and `/cv/` have static redirects to their replacements. Redirects use HTML refresh because GitHub Pages does not support server-side redirects.
+
+The existing GitHub Pages workflow deploys pushes to `main`; enable **GitHub Actions** as the Pages source in repository settings. Pull requests run checks and a build without deploying.
+
+For a custom domain or another static host, set `SITE_URL` to the production origin and `SITE_BASE=/` when building. This task does not change the legacy `.openai/hosting.json` project association.
+
+## Key files
+
+- `src/lib/site.ts` — profile and base-path helper
+- `content/research/` — Markdown / MDX articles
+- `src/content.config.ts` — frontmatter validation
+- `src/pages/research/[...id].astro` — article rendering and copy behavior
+- `src/components/TableOfContents.astro` — automatic TOC and active section
+- `src/plugins/code-window.ts` — Shiki window transformer
+- `src/styles/global.css` — typography, colors and responsive layout
+
+Visual direction is inspired by [Pxilg's blog](https://pxilg.com/blog/), with an original layout and typography.

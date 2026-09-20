@@ -1,5 +1,6 @@
 ---
-layout: ../../layouts/Article.astro
+sample: true
+lang: vi
 title: "Access control: kiểm thử ranh giới, không chỉ endpoint"
 date: 2026-09-05
 updated: 2026-09-10

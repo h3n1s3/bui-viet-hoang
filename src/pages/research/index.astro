@@ -1,0 +1,13 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ResearchList from '../../components/ResearchList.astro';
+import { getResearch } from '../../lib/research';
+const posts = await getResearch();
+---
+<Layout title="Research" active="research" description="Research notes on web security, vulnerability analysis and CTFs by Bui Viet Hoang.">
+  <section class="page-intro"><p class="eyebrow">NOTES / EXPERIMENTS / WRITE-UPS</p><h1 class="page-title"><span class="syntax">&lt;</span>Research <span class="syntax">/&gt;</span></h1><p>Exploring how things work. Understanding how they break.</p></section>
+  <section aria-label="Research articles" class="research-index">
+    <div class="index-label"><span>ALL ENTRIES</span><span>{String(posts.length).padStart(2, '0')} NOTES</span></div>
+    {posts.length ? <ResearchList posts={posts} /> : <p class="empty-state">Research notes are on the way. Check back soon.</p>}
+  </section>
+</Layout>
