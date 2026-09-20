@@ -1,6 +1,6 @@
 # Elaina ASCII artwork
 
-Input: owner-supplied `Elaina.jpg`. Prepared using the built-in imagegen tool, then converted deterministically to literal character rows with Sharp. The generated bitmap remains an offline source asset; the browser renders SVG text and animates only the silver-hair layers.
+Input: owner-supplied `Elaina.jpg`. Prepared using the built-in imagegen tool, then converted deterministically to literal character rows with Sharp. The generated bitmap remains an offline source asset; the browser renders SVG text and moves the complete character grid together with a restrained GIF-like drift. Keeping every layer on the same transform prevents the face, hat and hair from separating during animation.
 
 Final saved source: `src/assets/elaina-source.png`.
 Final ASCII data: `src/data/elaina-ascii.json`.

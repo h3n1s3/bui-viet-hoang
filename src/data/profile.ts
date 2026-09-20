@@ -10,4 +10,10 @@ export const socials: Social[] = [
 export type Certification = { title: string; issuer: string; date: string; image: string; url?: string };
 // Add only your own public credentials. Images belong in public/certifications/.
 export const certifications: Certification[] = [];
+export const certificationSamples: Certification[] = [
+ {title:'Cyber Foundations',issuer:'Layout preview',date:'SAMPLE 01',image:'/certifications/sample-cyber-foundations.svg'},
+ {title:'Web Security',issuer:'Layout preview',date:'SAMPLE 02',image:'/certifications/sample-web-security.svg'},
+ {title:'CTF Operations',issuer:'Layout preview',date:'SAMPLE 03',image:'/certifications/sample-ctf-operations.svg'},
+ {title:'Research Methods',issuer:'Layout preview',date:'SAMPLE 04',image:'/certifications/sample-research-methods.svg'},
+];
 export const projects = [{id:'PR-001',title:'Personal research website',description:'A static home for cybersecurity notes, experiments and writeups. Built with Astro, Markdown and Shiki.',tags:['Astro','TypeScript','Markdown'],url:'https://github.com/h3n1s3/bui-viet-hoang'}];

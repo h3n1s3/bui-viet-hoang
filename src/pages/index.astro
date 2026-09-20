@@ -19,10 +19,10 @@ const posts = await getResearch();
   <a class="scroll-cue" href="#overview">SCROLL TO EXPLORE <ArrowDown size={16} aria-hidden="true"/></a>
  </section>
  <section class="home-stats reveal" id="overview" aria-label="Website overview">
-  <div><strong>{String(posts.length).padStart(2,'0')}</strong><span>RESEARCH NOTES</span><small>includes sample articles</small></div>
-  <div><strong>{String(posts.filter(p=>p.data.category==='writeup').length).padStart(2,'0')}</strong><span>WRITEUPS</span><small>CTF & lab notes</small></div>
-  <div><strong>{String(certifications.length).padStart(2,'0')}</strong><span>CERTIFICATIONS</span><small>public credentials</small></div>
-  <div><strong>{String(projects.length).padStart(2,'0')}</strong><span>PROJECTS</span><small>open source & experiments</small></div>
+  <div class="stat-item" style="--stat-delay:0ms"><strong>{String(posts.length).padStart(2,'0')}</strong><span>RESEARCH NOTES</span><small>includes sample articles</small></div>
+  <div class="stat-item" style="--stat-delay:90ms"><strong>{String(posts.filter(p=>p.data.category==='writeup').length).padStart(2,'0')}</strong><span>WRITEUPS</span><small>CTF & lab notes</small></div>
+  <div class="stat-item" style="--stat-delay:180ms"><strong>{String(certifications.length).padStart(2,'0')}</strong><span>CERTIFICATIONS</span><small>public credentials</small></div>
+  <div class="stat-item" style="--stat-delay:270ms"><strong>{String(projects.length).padStart(2,'0')}</strong><span>PROJECTS</span><small>open source & experiments</small></div>
  </section>
  <Certifications/>
  <section id="about" class="home-section home-about reveal" aria-labelledby="about-heading">

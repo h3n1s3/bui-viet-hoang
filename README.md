@@ -117,11 +117,11 @@ Pixel headings use VCR OSD Neue by Elli Sho, distributed as 100% Free with autho
 
 Home fills the first viewport with the introduction and ASCII portrait, followed by data-driven counts, Certifications and About Me. `/about/` and `/cv/` redirect to Home's `#about` anchor. `/project/` lists published projects. Social icon links use owner-provided destinations; the supplied Hack The Box URL is the platform profile landing page, not an individual profile ID.
 
-Add certificate entries in `src/data/profile.ts` with `title`, `issuer`, `date`, `image` (public path), and optional verification `url`. The horizontal carousel supports previous/next controls and automatic scrolling; it pauses on hover, keyboard focus, offscreen, hidden tabs and reduced motion. No credentials have been supplied, so the section currently displays an honest empty state. Counts are calculated from the content, including explicitly marked sample notes.
+Add certificate entries in `src/data/profile.ts` with `title`, `issuer`, `date`, `image` (public path), and optional verification `url`. The section uses one continuously looping image row with a visible pause control; hover, the global motion control and reduced-motion preferences also pause it. No credentials have been supplied, so the current images are clearly marked `SAMPLE / DEMO / NOT A REAL CREDENTIAL` and the public credential count remains `00`. Counts are calculated from the real content, including explicitly marked sample research notes.
 
-Matrix streams, hair, HUD scan lines, blinking terminal cursors and scroll reveals are restrained. Use the footer's Pause motion button to pause animation across pages. The browser's reduced-motion preference always wins. TOC links have an animated active state and the boxed sidebar includes reading progress.
+Matrix streams, the ASCII portrait, HUD scan lines, blinking terminal cursors and scroll reveals are restrained. Use the footer's Pause motion button to pause animation across pages. The browser's reduced-motion preference always wins. Article pages use a fixed desktop TOC with an active green section and both local and page-wide reading progress.
 
-The portrait is literal SVG text, generated offline from `src/assets/elaina-source.png` into `src/data/elaina-ascii.json`. The image is not downloaded by website visitors. Regenerate with `node scripts/build-ascii.mjs`. The two hair layers move independently; the face remains still. Artwork preparation and prompts are documented in `docs/artwork.md`.
+The portrait is literal SVG text, generated offline from `src/assets/elaina-source.png` into `src/data/elaina-ascii.json`. The image is not downloaded by website visitors. Regenerate with `node scripts/build-ascii.mjs`. All character layers move together by only a few pixels so facial and hair details never separate. Artwork preparation and prompts are documented in `docs/artwork.md`.
 
 ## Achievements
 

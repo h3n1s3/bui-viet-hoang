@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Sample cyber foundations certificate</title>
+  <desc id="desc">A black, green, white, and yellow pixel-style demonstration certificate. It is not a real credential.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#b9ff66" stroke-opacity=".07" stroke-width="1"/>
+    </pattern>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="760" fill="#050706"/>
+  <rect x="22" y="22" width="1156" height="716" fill="url(#grid)" stroke="#334337" stroke-width="2"/>
+  <path d="M22 118H1178M222 118V738" stroke="#334337" stroke-width="2"/>
+  <rect x="22" y="22" width="1156" height="10" fill="#b9ff66"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace">
+    <text x="62" y="82" fill="#b9ff66" font-size="22" font-weight="700" letter-spacing="3">DEMO_CREDENTIAL // 01</text>
+    <text x="1138" y="82" fill="#f3cb55" font-size="18" text-anchor="end">PORTFOLIO PLACEHOLDER</text>
+
+    <text x="72" y="206" fill="#526353" font-size="68" font-weight="700">01</text>
+    <g fill="#b9ff66">
+      <rect x="70" y="242" width="10" height="10"/><rect x="90" y="242" width="10" height="10"/><rect x="110" y="242" width="10" height="10"/>
+      <rect x="70" y="262" width="10" height="10"/><rect x="110" y="262" width="10" height="10"/>
+      <rect x="70" y="282" width="10" height="10"/><rect x="90" y="282" width="10" height="10"/><rect x="110" y="282" width="10" height="10"/>
+    </g>
+    <text x="72" y="690" fill="#526353" font-size="13" letter-spacing="2" transform="rotate(-90 72 690)">STATIC_SAMPLE // NON-VERIFIABLE</text>
+
+    <text x="282" y="178" fill="#e7f1e8" font-size="19" letter-spacing="5">SAMPLE CERTIFICATE</text>
+    <text x="282" y="248" fill="#e7f1e8" font-size="55" font-weight="800">CYBER FOUNDATIONS</text>
+    <text x="282" y="292" fill="#b9ff66" font-size="23" letter-spacing="4">LAB COMPLETION // DEMO TRACK</text>
+
+    <text x="282" y="390" fill="#7b8e7e" font-size="16" letter-spacing="2">PRESENTED TO</text>
+    <text x="282" y="445" fill="#e7f1e8" font-size="34" font-weight="700">PORTFOLIO PLACEHOLDER</text>
+    <path d="M282 468H842" stroke="#526353" stroke-width="2"/>
+    <text x="282" y="506" fill="#9bad9e" font-size="16">For completing a simulated learning path in defensive security.</text>
+
+    <g transform="translate(948 410)">
+      <rect x="-88" y="-88" width="176" height="176" fill="#081009" stroke="#b9ff66" stroke-width="3"/>
+      <rect x="-68" y="-68" width="136" height="136" fill="none" stroke="#526353" stroke-width="2"/>
+      <path d="M0-48 43-24v48L0 48-43 24v-48Z" fill="none" stroke="#b9ff66" stroke-width="7" filter="url(#glow)"/>
+      <path d="m-17 0 12 12 25-28" fill="none" stroke="#f3cb55" stroke-width="8" stroke-linecap="square"/>
+      <text y="118" fill="#b9ff66" font-size="13" text-anchor="middle" letter-spacing="3">DEMO SEAL</text>
+    </g>
+
+    <path d="M282 595H1094" stroke="#334337" stroke-width="2"/>
+    <text x="282" y="636" fill="#f3cb55" font-size="16" letter-spacing="3">NOT A REAL CREDENTIAL</text>
+    <text x="1094" y="636" fill="#7b8e7e" font-size="15" text-anchor="end">ISSUED: 00.00.0000 // ID: SAMPLE-0001</text>
+    <text x="1094" y="690" fill="#526353" font-size="13" text-anchor="end">FOR INTERFACE DEMONSTRATION ONLY</text>
+  </g>
+
+  <text x="742" y="382" fill="#b9ff66" fill-opacity=".035" font-family="ui-monospace, Consolas, monospace" font-size="154" font-weight="900" text-anchor="middle" transform="rotate(-13 742 382)">SAMPLE</text>
+</svg>

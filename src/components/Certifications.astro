@@ -1,36 +1,38 @@
 ---
-import { ChevronLeft, ChevronRight } from '@lucide/astro';
-import { certifications } from '../data/profile';
+import { Pause, Play } from '@lucide/astro';
+import { certificationSamples, certifications } from '../data/profile';
 import { withBase } from '../lib/site';
+const preview = certifications.length === 0;
+const items = preview ? certificationSamples : certifications;
+const loops = [items, items];
 ---
 <section class="home-section certifications-section reveal" aria-labelledby="certifications-heading">
- <div class="section-heading"><h2 id="certifications-heading">&lt;Certifications /&gt;</h2></div>
- {certifications.length ? <div class="credential-carousel" data-carousel>
- <div class="carousel-controls" hidden><button aria-label="Previous certification" data-direction="-1"><ChevronLeft size={18}/></button><button aria-label="Pause certification scrolling" data-carousel-pause>Pause</button><button aria-label="Next certification" data-direction="1"><ChevronRight size={18}/></button></div>
- <div class="credential-track" tabindex="0" aria-label="Certifications, scroll horizontally">{certifications.map(c=><article class="credential-card"><img src={withBase(c.image)} alt={`${c.title} certificate`} loading="lazy"/><div><p class="eyebrow">{c.date}</p><h3>{c.title}</h3><p>{c.issuer}</p>{c.url&&<a href={c.url} target="_blank" rel="noopener noreferrer">Verify credential ↗</a>}</div></article>)}</div>
- </div> : <div class="credentials-empty"><span class="terminal-cursor" aria-hidden="true">_</span><p>No public certifications listed yet.</p><span>Credentials & continuous learning</span></div>}
+  <div class="section-heading"><h2 id="certifications-heading">&lt;Certifications /&gt;</h2></div>
+  <div class="certificate-marquee" data-certificate-marquee>
+    <div class="certificate-heading">
+      <p>{preview ? 'SAMPLE LAYOUT — REPLACE WITH YOUR CERTIFICATES' : `${certifications.length} VERIFIED CREDENTIALS`}</p>
+      <button type="button" class="certificate-pause" aria-label="Pause certificate carousel" aria-pressed="false" data-certificate-pause>
+        <Pause class="pause-icon" size={15} aria-hidden="true"/><Play class="play-icon" size={15} aria-hidden="true"/>
+      </button>
+    </div>
+    <div class="certificate-viewport" aria-label={preview ? 'Sample certificate design carousel' : 'Certifications'}>
+      <div class="certificate-loop">
+        {loops.map((group, groupIndex) => <div class="certificate-group" aria-hidden={groupIndex === 1 ? 'true' : undefined}>
+          {group.map(c => <article class="certificate-item">
+            <img src={withBase(c.image)} alt={groupIndex === 0 ? `${c.title}${preview ? ' sample certificate design' : ' certificate'}` : ''} loading="lazy"/>
+            <div class="certificate-label"><span>{c.date}</span><strong>{c.title}</strong><small>{c.issuer}</small></div>
+          </article>)}
+        </div>)}
+      </div>
+    </div>
+  </div>
 </section>
 <script>
-const carousel=document.querySelector<HTMLElement>('[data-carousel]');
-if(carousel){
- const track=carousel.querySelector<HTMLElement>('.credential-track')!;
- const controls=carousel.querySelector<HTMLElement>('.carousel-controls')!;
- const pause=carousel.querySelector<HTMLButtonElement>('[data-carousel-pause]')!;
- const reduced=matchMedia('(prefers-reduced-motion: reduce)');
- let paused=false,hovered=false,focused=false,visible=false,last=0,frame=0,position=0,direction=1;
- controls.hidden=false;
- const stop=()=>{cancelAnimationFrame(frame);frame=0;last=0;};
- const tick=(time:number)=>{const max=track.scrollWidth-track.clientWidth;if(last)position+=Math.min(time-last,64)*.025*direction;last=time;if(position>=max){position=max;direction=-1;}if(position<=0){position=0;direction=1;}track.scrollLeft=position;frame=requestAnimationFrame(tick);};
- const sync=()=>{stop();position=track.scrollLeft;if(document.documentElement.dataset.motion!=='paused'&&!paused&&!hovered&&!focused&&visible&&!reduced.matches&&!document.hidden&&track.scrollWidth>track.clientWidth)frame=requestAnimationFrame(tick);};
- pause.addEventListener('click',()=>{paused=!paused;pause.textContent=paused?'Play':'Pause';pause.setAttribute('aria-label',`${paused?'Resume':'Pause'} certification scrolling`);sync();});
- carousel.addEventListener('pointerenter',()=>{hovered=true;sync();});carousel.addEventListener('pointerleave',()=>{hovered=false;sync();});
- carousel.addEventListener('focusin',()=>{focused=true;sync();});carousel.addEventListener('focusout',e=>{if(!carousel.contains(e.relatedTarget as Node)){focused=false;sync();}});
- carousel.querySelectorAll<HTMLButtonElement>('[data-direction]').forEach(b=>b.addEventListener('click',()=>track.scrollBy({left:Number(b.dataset.direction)*320,behavior:reduced.matches?'instant':'smooth'})));
- new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;sync();}).observe(carousel);
- new MutationObserver(sync).observe(document.documentElement,{attributes:true,attributeFilter:['data-motion']});
- reduced.addEventListener('change',sync);document.addEventListener('visibilitychange',sync);
-}
+  const marquee = document.querySelector<HTMLElement>('[data-certificate-marquee]');
+  const pauseButton = marquee?.querySelector<HTMLButtonElement>('[data-certificate-pause]');
+  pauseButton?.addEventListener('click', () => {
+    const paused = marquee?.classList.toggle('is-paused') ?? false;
+    pauseButton.setAttribute('aria-pressed', String(paused));
+    pauseButton.setAttribute('aria-label', `${paused ? 'Resume' : 'Pause'} certificate carousel`);
+  });
 </script>
-
-
-

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Sample CTF operations certificate</title>
+  <desc id="desc">A geometric pixel-style CTF training certificate marked sample and not a real credential.</desc>
+  <defs>
+    <pattern id="scan" width="8" height="8" patternUnits="userSpaceOnUse">
+      <path d="M0 7.5H8" stroke="#e7f1e8" stroke-opacity=".025"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="760" fill="#050706"/>
+  <rect width="1200" height="760" fill="url(#scan)"/>
+  <rect x="26" y="26" width="1148" height="708" fill="none" stroke="#465849" stroke-width="2"/>
+  <path d="M26 26h210l24 24h680l24-24h210M26 734h210l24-24h680l24 24h210" fill="none" stroke="#b9ff66" stroke-width="4"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace">
+    <text x="64" y="85" fill="#b9ff66" font-size="17" letter-spacing="4">SIMULATION BADGE // 03</text>
+    <text x="1136" y="85" fill="#7b8e7e" font-size="15" text-anchor="end">TRAINING ENVIRONMENT</text>
+
+    <g transform="translate(270 362)">
+      <path d="M0-192 166-96v192L0 192-166 96V-96Z" fill="#071008" stroke="#b9ff66" stroke-width="5"/>
+      <path d="M0-154 132-77v154L0 154-132 77V-77Z" fill="none" stroke="#465849" stroke-width="3"/>
+      <circle r="84" fill="none" stroke="#f3cb55" stroke-width="3" stroke-dasharray="10 12"/>
+      <circle r="49" fill="#b9ff66" fill-opacity=".08" stroke="#b9ff66" stroke-width="5"/>
+      <path d="M-26-25H26V27H-26ZM-13-25v-14c0-21 26-21 26 0v14" fill="none" stroke="#e7f1e8" stroke-width="9"/>
+      <rect x="-5" y="-4" width="10" height="18" fill="#f3cb55"/>
+    </g>
+
+    <text x="518" y="178" fill="#7b8e7e" font-size="17" letter-spacing="5">SAMPLE CERTIFICATE</text>
+    <text x="518" y="250" fill="#e7f1e8" font-size="58" font-weight="800">CTF OPERATIONS</text>
+    <text x="518" y="296" fill="#b9ff66" font-size="21" letter-spacing="5">SANDBOX EXERCISE SERIES</text>
+
+    <path d="M518 346H1118" stroke="#465849" stroke-width="2"/>
+    <text x="518" y="395" fill="#7b8e7e" font-size="14" letter-spacing="3">PARTICIPANT</text>
+    <text x="518" y="444" fill="#e7f1e8" font-size="30" font-weight="700">PORTFOLIO PLACEHOLDER</text>
+
+    <g transform="translate(518 488)">
+      <rect width="184" height="62" fill="#0a100b" stroke="#465849"/>
+      <text x="18" y="25" fill="#526353" font-size="12">CATEGORY</text>
+      <text x="18" y="48" fill="#b9ff66" font-size="15">DEMO_ONLY</text>
+      <rect x="200" width="184" height="62" fill="#0a100b" stroke="#465849"/>
+      <text x="218" y="25" fill="#526353" font-size="12">SCORE</text>
+      <text x="218" y="48" fill="#f3cb55" font-size="15">000 / 000</text>
+      <rect x="400" width="200" height="62" fill="#0a100b" stroke="#465849"/>
+      <text x="418" y="25" fill="#526353" font-size="12">VALIDITY</text>
+      <text x="418" y="48" fill="#e7f1e8" font-size="15">NONE</text>
+    </g>
+
+    <text x="518" y="622" fill="#f3cb55" font-size="18" font-weight="700" letter-spacing="3">NOT A REAL CREDENTIAL</text>
+    <text x="1118" y="622" fill="#7b8e7e" font-size="14" text-anchor="end">SAMPLE-0003</text>
+    <text x="518" y="670" fill="#526353" font-size="13">Created solely to demonstrate a one-line certificate carousel.</text>
+
+    <g fill="#b9ff66">
+      <rect x="64" y="648" width="12" height="12"/><rect x="84" y="648" width="12" height="12"/><rect x="104" y="648" width="12" height="12"/>
+      <rect x="64" y="668" width="12" height="12"/><rect x="104" y="668" width="12" height="12"/>
+      <rect x="64" y="688" width="12" height="12"/><rect x="84" y="688" width="12" height="12"/><rect x="104" y="688" width="12" height="12"/>
+    </g>
+  </g>
+
+  <text x="610" y="430" fill="#b9ff66" fill-opacity=".03" font-family="ui-monospace, Consolas, monospace" font-size="156" font-weight="900" text-anchor="middle" transform="rotate(-12 610 430)">SAMPLE</text>
+</svg>

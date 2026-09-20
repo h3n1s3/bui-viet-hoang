@@ -3,7 +3,7 @@ import type { MarkdownHeading } from 'astro';
 interface Props { headings: MarkdownHeading[] }
 const headings = Astro.props.headings.filter(heading => heading.depth === 2 || heading.depth === 3);
 ---
-{headings.length > 0 && <aside class="toc-aside"><details class="toc" open data-toc><summary>On this page <span aria-hidden="true">+</span></summary><nav aria-label="Table of contents"><ol>{headings.map(heading => <li class:list={{ 'toc-nested': heading.depth === 3 }}><a href={`#${heading.slug}`} data-toc-link>{heading.text}</a></li>)}</ol></nav></details><div class="toc-progress" aria-hidden="true"><span data-reading-progress></span></div></aside>}
+{headings.length > 0 && <><div class="reading-progress-global" aria-hidden="true"><span data-reading-progress-global></span></div><aside class="toc-aside"><details class="toc" open data-toc><summary>ON THIS PAGE <span aria-hidden="true">+</span></summary><nav aria-label="Table of contents"><ol>{headings.map(heading => <li class:list={{ 'toc-nested': heading.depth === 3 }}><a href={`#${heading.slug}`} data-toc-link>{heading.text}</a></li>)}</ol></nav></details><div class="toc-progress" aria-hidden="true"><span data-reading-progress></span></div></aside></>}
 <script>
   const toc = document.querySelector<HTMLDetailsElement>('[data-toc]');
   if (toc) {
@@ -21,7 +21,13 @@ const headings = Astro.props.headings.filter(heading => heading.depth === 2 || h
     function updateActive() {
       const article = document.querySelector<HTMLElement>('.article-content');
       const progress = document.querySelector<HTMLElement>('[data-reading-progress]');
-      if (article && progress) { const box = article.getBoundingClientRect(); progress.style.setProperty('--progress', String(Math.max(0,Math.min(1,(140-box.top)/Math.max(1,box.height-innerHeight+140))))); }
+      const globalProgress = document.querySelector<HTMLElement>('[data-reading-progress-global]');
+      if (article && progress) {
+        const box = article.getBoundingClientRect();
+        const value = String(Math.max(0, Math.min(1, (140 - box.top) / Math.max(1, box.height - innerHeight + 140))));
+        progress.style.setProperty('--progress', value);
+        globalProgress?.style.setProperty('--progress', value);
+      }
       let next = 0;
       sections.forEach((section, index) => { if (section && section.getBoundingClientRect().top <= 140) next = index; });
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8) next = links.length - 1;
