@@ -14,18 +14,18 @@ const { Content, headings } = await render(post);
 const cover = post.data.cover?.startsWith('/') ? withBase(post.data.cover) : post.data.cover;
 ---
 <Layout title={post.data.title} description={post.data.description} active="research" article lang={post.data.lang}>
+  {cover && <div class="article-cover-wrap"><img class="article-cover" src={cover} alt={post.data.coverAlt ?? ''} /></div>}
   <header class="article-header">
     <a class="back-link" href={withBase('research/')}><span aria-hidden="true">←</span> All research</a>
     <div class="article-meta"><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time><span aria-hidden="true">/</span><span>{readingTime(post.body)} min read</span></div>
-    <h1>{post.data.title}</h1><p class="article-description">{post.data.description}</p>
     <div class="tags">{post.data.tags.map(tag => <span>{tag}</span>)}</div>
+    <h1>{post.data.title}</h1><p class="article-description">{post.data.description}</p>
     {post.data.updated && <p class="updated">Updated {formatDate(post.data.updated)}</p>}
   </header>
   <div class="article-layout">
     <TableOfContents headings={headings} />
     <article class="article-content">
       {post.data.sample && <p class="sample-notice">Sample research note — illustrative content, not a claim of an original discovery or published vulnerability.</p>}
-      {cover && <img class="article-cover" src={cover} alt={post.data.coverAlt ?? ''} />}
       <Content />
       <div class="article-end"><span aria-hidden="true">∎</span><a href={withBase('research/')}>Back to research <span aria-hidden="true">↗</span></a></div>
     </article>

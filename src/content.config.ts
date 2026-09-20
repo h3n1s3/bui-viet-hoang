@@ -10,6 +10,7 @@ const research = defineCollection({
     date: z.coerce.date(),
     updated: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),
+    category: z.enum(['blog', 'writeup']).default('blog'),
     draft: z.boolean().default(false),
     sample: z.boolean().default(false),
     lang: z.enum(['en', 'vi']).default('en'),

@@ -3,11 +3,38 @@ import Layout from '../../layouts/Layout.astro';
 import ResearchList from '../../components/ResearchList.astro';
 import { getResearch } from '../../lib/research';
 const posts = await getResearch();
+const filters = [
+  { value: 'all', label: 'All', count: posts.length },
+  { value: 'blog', label: 'Blog', count: posts.filter(post => post.data.category === 'blog').length },
+  { value: 'writeup', label: 'Writeup', count: posts.filter(post => post.data.category === 'writeup').length },
+];
 ---
-<Layout title="Research" active="research" description="Research notes on web security, vulnerability analysis and CTFs by Bui Viet Hoang.">
-  <section class="page-intro"><p class="eyebrow">NOTES / EXPERIMENTS / WRITE-UPS</p><h1 class="page-title"><span class="syntax">&lt;</span>Research <span class="syntax">/&gt;</span></h1><p>Exploring how things work. Understanding how they break.</p></section>
+<Layout title="Research" active="research" description="Cybersecurity research, blog posts and writeups by Bui Viet Hoang.">
+  <section class="page-intro research-intro"><h1 class="page-title">&lt;Research /&gt;</h1><p class="sr-only">Cybersecurity research, blog posts and writeups.</p></section>
   <section aria-label="Research articles" class="research-index">
-    <div class="index-label"><span>ALL ENTRIES</span><span>{String(posts.length).padStart(2, '0')} NOTES</span></div>
-    {posts.length ? <ResearchList posts={posts} /> : <p class="empty-state">Research notes are on the way. Check back soon.</p>}
+    <div class="research-filters flex flex-wrap gap-2" aria-label="Filter research" hidden data-research-filters>
+      {filters.map(filter => <button type="button" data-filter={filter.value} aria-pressed={filter.value === 'all'} aria-controls="research-results"><span class="filter-prompt" aria-hidden="true">&gt; </span>{filter.label} <span class="filter-count">[{filter.count}]</span></button>)}
+    </div>
+    <p class="sr-only" role="status" data-filter-status>{posts.length} research entries</p>
+    <div id="research-results">{posts.length ? <ResearchList posts={posts} headingLevel="h2" /> : <p class="empty-state">Research notes are on the way. Check back soon.</p>}</div>
+    <p class="empty-state" hidden data-no-results>No entries in this category yet.</p>
   </section>
 </Layout>
+<script>
+  const filters = document.querySelector<HTMLElement>('[data-research-filters]');
+  if (filters) {
+    filters.hidden = false;
+    const buttons = [...filters.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+    const entries = [...document.querySelectorAll<HTMLElement>('.research-card')];
+    buttons.forEach(button => button.addEventListener('click', () => {
+      buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      let count = 0;
+      entries.forEach(entry => {
+        entry.hidden = button.dataset.filter !== 'all' && button.dataset.filter !== entry.dataset.category;
+        if (!entry.hidden) count++;
+      });
+      document.querySelector('[data-filter-status]')!.textContent = `${count} ${button.dataset.filter === 'all' ? 'research' : button.dataset.filter} entries`;
+      document.querySelector<HTMLElement>('[data-no-results]')!.hidden = count !== 0;
+    }));
+  }
+</script>

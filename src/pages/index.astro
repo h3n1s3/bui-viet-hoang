@@ -1,20 +1,31 @@
 ---
+import { CodeXml, ArrowUpRight, BookOpen } from '@lucide/astro';
 import Layout from '../layouts/Layout.astro';
 import ResearchList from '../components/ResearchList.astro';
+import BinaryBackdrop from '../components/BinaryBackdrop.astro';
+import AsciiShield from '../components/AsciiShield.astro';
 import { profile, withBase } from '../lib/site';
 import { getResearch } from '../lib/research';
 const posts = await getResearch();
 ---
 <Layout>
   <section class="home-intro">
-    <p class="eyebrow">PERSONAL SITE / SECURITY RESEARCH</p>
-    <h1>Hi, I'm {profile.name}<span class="accent">.</span></h1>
-    <p class="hero-statement">I research, build and break things<br class="desktop-break" /> <span>in cybersecurity.</span></p>
-    <p class="hero-role">{profile.role}</p>
-    <div class="hero-links"><a class="primary-link" href={withBase('research/')}>Explore research <span aria-hidden="true">↗</span></a><a class="text-link" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></div>
+    <BinaryBackdrop hero />
+    <div class="hero-copy">
+      <p class="hero-name">Hi, I'm {profile.name}.</p>
+      <h1>&lt;{profile.handle} /&gt;</h1>
+      <p class="hero-statement">I research, build and break things<br />in cybersecurity.</p>
+      <p class="hero-role">{profile.role}</p>
+      <div class="hero-links flex flex-wrap items-center justify-center gap-4">
+        <a class="primary-link" href={withBase('research/')}><BookOpen size={18} aria-hidden="true" />Research <ArrowUpRight size={16} aria-hidden="true" /></a>
+        <a class="social-link" href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub profile"><CodeXml size={21} aria-hidden="true" /></a>
+      </div>
+    </div>
+    <AsciiShield />
   </section>
   <section class="latest-section" aria-labelledby="latest-heading">
-    <div class="section-heading"><h2 id="latest-heading"><span aria-hidden="true">&lt;</span> Latest research <span aria-hidden="true">/&gt;</span></h2><a href={withBase('research/')}>View all <span aria-hidden="true">↗</span></a></div>
-    {posts.length ? <ResearchList posts={posts.slice(0, 3)} /> : <p class="empty-state">Research notes are on the way.</p>}
+    <div class="section-heading"><h2 id="latest-heading">&lt;Latest Research /&gt;</h2></div>
+    {posts.length ? <ResearchList posts={posts.slice(0, 2)} /> : <p class="empty-state">Research notes are on the way.</p>}
+    <a class="all-research" href={withBase('research/')}>View all research <ArrowUpRight size={17} aria-hidden="true" /></a>
   </section>
 </Layout>

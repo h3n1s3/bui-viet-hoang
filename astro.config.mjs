@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import mdx from '@astrojs/mdx';
+import tailwindcss from '@tailwindcss/vite';
 import { codeWindow } from './src/plugins/code-window';
 import { contentPaths } from './src/plugins/content-paths';
 
@@ -15,6 +16,7 @@ export default defineConfig({
   base,
   trailingSlash: 'always',
   integrations: [sitemap(), mdx()],
+  vite: { plugins: [tailwindcss()] },
   redirects: {
     '/blog': destination('research/'),
     '/blog/access-control': destination('research/access-control/'),

@@ -2,7 +2,7 @@
 
 A minimal, dark personal website with three sections: **Home**, **Research**, and **About**. Research is authored in Markdown or MDX. Fonts and syntax highlighting are served locally; there is no CMS, analytics, external font request, or client framework runtime.
 
-The repository already used Astro, so it stays on Astro rather than migrating to Next.js. Astro's content collections, TypeScript, MDX integration and Shiki provide the requested static publishing workflow with very little browser JavaScript. Styling is plain CSS in one file rather than adding Tailwind for a small site.
+The repository already used Astro, so it stays on Astro rather than migrating to Next.js. Astro's content collections, TypeScript, MDX integration and Shiki provide the requested static publishing workflow with very little browser JavaScript. Tailwind CSS provides layout utilities; a single stylesheet defines the pixel/terminal visual system. Lucide provides interface icons.
 
 ## Development
 
@@ -38,6 +38,7 @@ title: 'A descriptive research title'
 date: 2026-09-20
 description: 'A short summary for the research index and search previews.'
 tags: [Web Security, CTF]
+category: blog # blog or writeup
 draft: false
 lang: en
 ---
@@ -57,9 +58,9 @@ The evidence and its limitations.
 What you learned.
 ```
 
-The filename becomes `/research/my-research/`. Nested folders are supported. Published entries automatically appear on Research, on Home (three newest), in RSS and in the sitemap. `draft: true` excludes the route and all public listings in development and production. Dates are displayed in UTC and sorted newest first.
+The filename becomes `/research/my-research/`. Nested folders are supported. Published entries automatically appear on Research, on Home (two newest), in RSS and in the sitemap. `draft: true` excludes the route and all public listings in development and production. Dates are displayed in UTC and sorted newest first.
 
-Supported frontmatter: `title`, `date`, `description`, `tags`, optional `updated`, `draft`, `sample`, `lang` (`en` or `vi`), `cover` and `coverAlt`. A schema validates metadata at build time. No layout field is needed.
+Supported frontmatter: `title`, `date`, `description`, `tags`, `category` (`blog` or `writeup`, defaults to `blog`), optional `updated`, `draft`, `sample`, `lang` (`en` or `vi`), `cover` and `coverAlt`. A schema validates metadata at build time. No layout field is needed.
 
 ### Markdown and MDX
 
@@ -108,4 +109,6 @@ For a custom domain or another static host, set `SITE_URL` to the production ori
 - `src/plugins/code-window.ts` — Shiki window transformer
 - `src/styles/global.css` — typography, colors and responsive layout
 
-Visual direction is inspired by [Pxilg's blog](https://pxilg.com/blog/), with an original layout and typography.
+Visual direction is inspired by [Pxilg's blog](https://pxilg.com/blog/), with black surfaces, pixel typography, two-column terminal cards, a static binary backdrop and an original ASCII shield. Research includes Blog/Writeup filters. A theme toggle remembers the chosen light/dark theme locally; dark is the default.
+
+Pixel headings use VCR OSD Neue by Elli Sho, distributed as 100% Free with author credit requested ([font source](https://www.dafont.com/vcrosdneue.font), see public/fonts/NOTICE.md). Vietnamese headings use VT323 by Peter Hull for complete accents. Article body text uses Inter and code uses JetBrains Mono. All fonts are served locally.
