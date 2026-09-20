@@ -24,7 +24,9 @@ npm run preview # Serve the production build locally
 
 ## Personal information
 
-Edit `src/lib/site.ts` for the name, handle, role, GitHub and optional email. Edit `src/pages/index.astro` for the About Me section and interests. Social links, certifications and projects live in `src/data/profile.ts`. The initial name comes from the repository name; social URLs and email were supplied by the owner; no certifications, CVEs or employment history have been invented. Confirm the introduction before publishing.
+Edit `src/lib/site.ts` for the name, handle, role and GitHub profile. Edit `src/pages/index.astro` for the About Me section and interests. Social links, certifications, vulnerability disclosures, CTF milestones and projects live in `src/data/profile.ts`. The initial name comes from the repository name; social URLs and email were supplied by the owner; no certifications or employment history have been invented. Confirm the introduction before publishing.
+
+See [docs/content-management.md](docs/content-management.md) for a Vietnamese, copy-paste guide to adding posts, writeups, certificates, CVEs, pending reports, CTF results, projects and profile links, plus the publishing workflow.
 
 All four bundled notes are marked `sample: true`. Three preserve the original Vietnamese sample content; the CSS note is an English demonstration of the new article layout. Replace them with your own research, or set `draft: true` to hide them. The sample flag displays a small label and an article notice; it does **not** hide a post.
 
@@ -125,4 +127,4 @@ The portrait is literal SVG text, generated offline from `src/assets/elaina-sour
 
 ## Achievements
 
-`src/components/Achievements.astro` separates Security Research from CTF. CVE-2026-62101 was checked against the official CVE JSON record on 2026-09-20: EduAdmin Booking <= 5.4.2, unauthenticated broken authentication, CVSS 9.8, fixed in 6.0.0, finder credit `henise`. The Memberful report is explicitly marked as awaiting patch/CVE assignment and uses owner-provided details, not a claimed published advisory. No CTF results were supplied, so that subsection is ready for real milestones without invented rankings. Patchstack is included among the six social links.
+`src/components/Achievements.astro` separates Security Research from CTF and renders the `securityAchievements` and `ctfAchievements` arrays in `src/data/profile.ts`. CVE-2026-62101 was checked against the official CVE JSON record on 2026-09-20: EduAdmin Booking <= 5.4.2, unauthenticated broken authentication, CVSS 9.8, fixed in 6.0.0, finder credit `henise`. The Memberful report is explicitly marked as awaiting patch/CVE assignment and uses owner-provided details, not a claimed published advisory. No CTF results were supplied, so that subsection is ready for real milestones without invented rankings. Patchstack is included among the six social links.

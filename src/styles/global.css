@@ -561,6 +561,8 @@ h1, h2, h3, h4 { font-weight: 400; }
   background: var(--surface);
   clip-path: polygon(0 10px,10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%);
 }
+.certificate-link { display: block; color: inherit; }
+.certificate-link:hover strong { color: var(--accent); }
 .certificate-item img {
   display: block;
   width: 100%;

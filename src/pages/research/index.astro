@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import ResearchList from '../../components/ResearchList.astro';
 import { getResearch } from '../../lib/research';
+import { profile } from '../../lib/site';
 const posts = await getResearch();
 const filters = [
   { value: 'all', label: 'All', count: posts.length },
@@ -9,7 +10,7 @@ const filters = [
   { value: 'writeup', label: 'Writeup', count: posts.filter(post => post.data.category === 'writeup').length },
 ];
 ---
-<Layout title="Research" active="research" description="Cybersecurity research, blog posts and writeups by Bui Viet Hoang.">
+<Layout title="Research" active="research" description={`Cybersecurity research, blog posts and writeups by ${profile.name}.`}>
   <section class="page-intro research-intro"><h1 class="page-title">&lt;Research /&gt;</h1><p class="sr-only">Cybersecurity research, blog posts and writeups.</p></section>
   <section aria-label="Research articles" class="research-index">
     <div class="research-filters flex flex-wrap gap-2" aria-label="Filter research" hidden data-research-filters>

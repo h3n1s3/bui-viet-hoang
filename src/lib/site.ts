@@ -4,8 +4,6 @@ export const profile = {
   role: 'Security Researcher · CTF Player',
   description: 'Research, experiments and field notes in cybersecurity.',
   github: 'https://github.com/h3n1s3',
-  // Add a public contact address to display an email link on About.
-  email: 'dariousdollars@gmail.com',
 };
 
 export function withBase(path = ''): string {

@@ -10,7 +10,7 @@ const loops = [items, items];
   <div class="section-heading"><h2 id="certifications-heading">&lt;Certifications /&gt;</h2></div>
   <div class="certificate-marquee" data-certificate-marquee>
     <div class="certificate-heading">
-      <p>{preview ? 'SAMPLE LAYOUT — REPLACE WITH YOUR CERTIFICATES' : `${certifications.length} VERIFIED CREDENTIALS`}</p>
+      <p>{preview ? 'SAMPLE LAYOUT — REPLACE WITH YOUR CERTIFICATES' : `${certifications.length} PUBLIC CREDENTIALS`}</p>
       <button type="button" class="certificate-pause" aria-label="Pause certificate carousel" aria-pressed="false" data-certificate-pause>
         <Pause class="pause-icon" size={15} aria-hidden="true"/><Play class="play-icon" size={15} aria-hidden="true"/>
       </button>
@@ -19,8 +19,13 @@ const loops = [items, items];
       <div class="certificate-loop">
         {loops.map((group, groupIndex) => <div class="certificate-group" aria-hidden={groupIndex === 1 ? 'true' : undefined}>
           {group.map(c => <article class="certificate-item">
-            <img src={withBase(c.image)} alt={groupIndex === 0 ? `${c.title}${preview ? ' sample certificate design' : ' certificate'}` : ''} loading="lazy"/>
-            <div class="certificate-label"><span>{c.date}</span><strong>{c.title}</strong><small>{c.issuer}</small></div>
+            {c.url ? <a class="certificate-link" href={c.url} target="_blank" rel="noopener noreferrer" tabindex={groupIndex === 1 ? -1 : undefined}>
+              <img src={withBase(c.image)} alt={groupIndex === 0 ? `${c.title} certificate` : ''} loading="lazy"/>
+              <div class="certificate-label"><span>{c.date}</span><strong>{c.title}</strong><small>{c.issuer} · VERIFY ↗</small></div>
+            </a> : <>
+              <img src={withBase(c.image)} alt={groupIndex === 0 ? `${c.title}${preview ? ' sample certificate design' : ' certificate'}` : ''} loading="lazy"/>
+              <div class="certificate-label"><span>{c.date}</span><strong>{c.title}</strong><small>{c.issuer}</small></div>
+            </>}
           </article>)}
         </div>)}
       </div>
