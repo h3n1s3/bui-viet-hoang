@@ -5,6 +5,7 @@ import BinaryBackdrop from '../components/BinaryBackdrop.astro';
 import AsciiPortrait from '../components/AsciiPortrait.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import Certifications from '../components/Certifications.astro';
+import Achievements from '../components/Achievements.astro';
 import { profile, withBase } from '../lib/site';
 import { getResearch } from '../lib/research';
 import { certifications, projects } from '../data/profile';
@@ -28,4 +29,5 @@ const posts = await getResearch();
   <div class="section-heading"><h2 id="about-heading">&lt;About Me /&gt;</h2></div>
   <div class="about-grid"><div><p class="command about-command"><span class="terminal-cursor" aria-hidden="true">$</span> whoami</p><h3>{profile.name}<span class="muted"> / {profile.handle}</span></h3><p>I'm interested in the space between how a system is designed and how it actually behaves. I research, build and break things in cybersecurity, then write down what I learn.</p><SocialLinks/></div><div class="about-focus"><section><span>01 / CURRENT INTERESTS</span><h3>Web application security</h3><p>Authentication, access control and the root causes of vulnerabilities.</p></section><section><span>02 / CTF & RESEARCH</span><h3>Question. Build. Reproduce.</h3><p>Small test cases, reproducible observations and a notebook of lessons learned.</p><a class="text-link" href={withBase('research/')}>Explore research <ArrowUpRight size={16}/></a></section></div></div>
  </section>
+ <Achievements />
 </Layout>

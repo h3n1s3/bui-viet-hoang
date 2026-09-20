@@ -13,3 +13,10 @@ The first output had a baked checkerboard rather than alpha transparency. It was
 > Edit target supplied image: replace ONLY the gray/white checkerboard background with pure solid black RGB 0,0,0. Keep the character, witch hat, fine silver hair, face, clothes and cat identical. No checkerboard. No glow. Black background everywhere outside character silhouette. This is for luminance to ASCII conversion. Preserve pose and art.
 
 Dark background pixels become spaces during conversion. The preserved foreground includes the cat from the supplied image. This is a generated adaptation of the supplied illustration, not a pixel-exact background mask.
+
+## Upper-body revision
+
+The current source reconstructs the complete hat and shows the character down to the hands, omitting the thighs. Built-in imagegen prompt:
+> Edit this Elaina illustration for a website ASCII portrait source. Preserve the same anime witch face, silver hair, purple hat, clothing and black cat. Reframe as an UPPER BODY portrait, from COMPLETE hat tip to waist/hands holding cat; omit thighs and legs. Reconstruct the missing TOP of the hat and its entire LEFT and RIGHT brim naturally. CRITICAL: the whole hat and all hair are completely inside the frame with generous 8% pure black margin on ALL edges, never touch or crop at top or sides. Pure solid black RGB 0 background, no garden, no checkerboard, no glow, no text. Natural proportions, recognizable expression. Portrait composition with enough horizontal room for the broad complete witch hat. Keep original illustration style.
+
+The ASCII grid is now 140 columns by 124 rows, with extra SVG viewBox padding to preserve the hat edges. Source and output paths above remain the same.

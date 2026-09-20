@@ -19,7 +19,7 @@ const cover = post.data.cover?.startsWith('/') ? withBase(post.data.cover) : pos
     <a class="back-link" href={withBase('research/')}><span aria-hidden="true">←</span> All research</a>
     <div class="article-meta"><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time><span aria-hidden="true">/</span><span>{readingTime(post.body)} min read</span></div>
     <div class="tags">{post.data.tags.map(tag => <span>{tag}</span>)}</div>
-    <h1>{post.data.title}</h1><p class="article-description">{post.data.description}</p>
+    <h1>{post.data.title}<span class="terminal-cursor title-cursor" aria-hidden="true">_</span></h1><p class="article-description">{post.data.description}</p>
     {post.data.updated && <p class="updated">Updated {formatDate(post.data.updated)}</p>}
   </header>
   <div class="article-layout">
@@ -32,6 +32,13 @@ const cover = post.data.cover?.startsWith('/') ? withBase(post.data.cover) : pos
   </div>
 </Layout>
 <script>
+  document.querySelectorAll('.article-content h2, .article-content h3').forEach(heading => {
+    const cursor = document.createElement('span');
+    cursor.className = 'terminal-cursor title-cursor';
+    cursor.setAttribute('aria-hidden', 'true');
+    cursor.textContent = '_';
+    heading.append(cursor);
+  });
   document.querySelectorAll<HTMLButtonElement>('[data-copy-code]').forEach(button => {
     button.hidden = false;
     button.addEventListener('click', async () => {

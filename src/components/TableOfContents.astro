@@ -7,7 +7,11 @@ const headings = Astro.props.headings.filter(heading => heading.depth === 2 || h
 <script>
   const toc = document.querySelector<HTMLDetailsElement>('[data-toc]');
   if (toc) {
-    const desktop = matchMedia('(min-width: 960px)');
+    const desktop = matchMedia('(min-width: 1280px)');
+    const aside = toc.closest<HTMLElement>('.toc-aside')!;
+    aside.classList.add('toc-floating');
+    document.addEventListener('keydown', event => { if(event.key === 'Escape' && !desktop.matches && toc.open) { toc.open=false; toc.querySelector('summary')?.focus(); } });
+    document.addEventListener('click', event => { if(!desktop.matches && !aside.contains(event.target as Node)) toc.open=false; });
     const syncLayout = () => { toc.open = desktop.matches; };
     syncLayout();
     desktop.addEventListener('change', syncLayout);
