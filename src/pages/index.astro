@@ -14,7 +14,7 @@ const posts = await getResearch();
 <Layout>
  <section class="home-intro hero-expanded">
   <BinaryBackdrop hero />
-  <div class="hero-copy"><p class="hero-name">Hi, I'm {profile.name}.</p><h1>&lt;{profile.handle} /&gt;<span class="terminal-cursor" aria-hidden="true">_</span></h1><p class="hero-statement">I research, build and break things<br/>in cybersecurity.</p><p class="hero-role">{profile.role}</p><SocialLinks/></div>
+  <div class="hero-copy"><p class="hero-name">Hi, I'm {profile.name}.</p><h1>&lt;{profile.handle} /&gt;<span class="terminal-cursor" aria-hidden="true">_</span></h1><p class="hero-statement">{profile.description}</p><p class="hero-role">{profile.role}</p><SocialLinks/></div>
   <AsciiPortrait/>
   <a class="scroll-cue" href="#overview">SCROLL TO EXPLORE <ArrowDown size={16} aria-hidden="true"/></a>
  </section>

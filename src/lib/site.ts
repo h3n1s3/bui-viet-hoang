@@ -1,8 +1,8 @@
 export const profile = {
   name: 'Bui Viet Hoang',
   handle: 'h3n1s3',
-  role: 'Security Researcher · CTF Player',
-  description: 'Research, experiments and field notes in cybersecurity.',
+  role: 'CTFer | Penetration Tester | Bug Bounty Hunter',
+  description: 'i am a information security student in Academy of Cryptography Techniques.',
   github: 'https://github.com/h3n1s3',
 };
 
