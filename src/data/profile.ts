@@ -47,12 +47,15 @@ export const securityAchievements: SecurityAchievement[] = [
     advisoryLabel: 'Read advisory',
   },
   {
-    status: 'in-disclosure',
-    statusLabel: 'IN DISCLOSURE',
-    title: 'Memberful WP — account-linking vulnerability',
+    status: 'published',
+    statusLabel: 'PUBLISHED',
+    title: 'CVE-2026-103067',
     description: 'Reported an OAuth state-validation weakness in Memberful WP ≤ 1.81.0. The reported impact is a persistent account-linking flaw that can lead to administrator account takeover.',
-    meta: 'Patch & CVE assignment pending',
+    meta: 'CVSS 8.0 / High',
+    url: 'https://www.cve.org/CVERecord?id=CVE-2026-103067',
     credit: 'Submitted as a privilege-escalation chain involving CSRF. Details and status are based on my research report; a public CVE identifier has not yet been assigned.',
+    advisoryUrl: 'https://patchstack.com/database/wordpress/plugin/memberful-wp/vulnerability/wordpress-memberful-membership-plugin-plugin-1-81-0-cross-site-request-forgery-csrf-vulnerability',
+    advisoryLabel: 'Read advisory',
   },
 ];
 
