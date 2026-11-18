@@ -19,8 +19,8 @@ export default defineConfig({
   vite: { plugins: [tailwindcss()] },
   redirects: {
     '/blog': destination('research/'),
-    '/blog/access-control': destination('research/access-control/'),
-    '/blog/disclosure': destination('research/disclosure/'),
+    '/blog/access-control': destination('research/'),
+    '/blog/disclosure': destination('research/'),
     '/blog/lab-notes': destination('research/lab-notes/'),
     '/cv': destination('#about'),
     '/about': destination('#about'),

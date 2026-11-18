@@ -168,7 +168,7 @@ Ngày trong tương lai vẫn public ngay nếu `draft` không phải `true`; si
 - Xóa: xóa file tương ứng.
 - Chuyển bài sample thành bài thật: thay nội dung và đặt `sample: false` hoặc bỏ field `sample`.
 
-Bốn bài đi kèm ban đầu đều có `sample: true`. Sample vẫn được tính trong Research, RSS, sitemap và các bộ đếm. Nếu chỉ muốn nội dung thật, hãy thay chúng, xóa chúng hoặc đặt `draft: true`.
+Bài HackTheBox đi kèm vẫn có `sample: true`. Bốn writeup CTF mới trong `content/research/` là nội dung thật được nhập từ HackMD, không phải sample. Sample vẫn được tính trong Research, RSS, sitemap và các bộ đếm; dùng `draft: true` nếu muốn ẩn một bài.
 
 ## 5. Markdown, MDX và Table of Contents
 

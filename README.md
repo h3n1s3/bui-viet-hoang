@@ -28,7 +28,7 @@ Edit `src/lib/site.ts` for the name, handle, role and GitHub profile. Edit `src/
 
 See [GUIDE.md](GUIDE.md) for the complete Vietnamese, copy-paste guide to running the site, editing the profile, adding posts, writeups, certificates, CVEs, pending reports, CTF results and projects, and publishing through GitHub Pages.
 
-All four bundled notes are marked `sample: true`. Three preserve the original Vietnamese sample content; the CSS note is an English demonstration of the new article layout. Replace them with your own research, or set `draft: true` to hide them. The sample flag displays a small label and an article notice; it does **not** hide a post.
+The bundled HackTheBox note remains marked `sample: true`. The four CTF writeups in `content/research/` were imported from HackMD and are real writeups, not sample content. The sample flag displays a small label and an article notice; it does **not** hide a post.
 
 ## Write a research article
 
@@ -95,7 +95,7 @@ Shiki highlights code at build time. A transformer adds the macOS window dots, f
 - Base: `/bui-viet-hoang/`
 - Output: `dist/`
 
-The old, incorrect `/thpt-2026/` hardcoding has been removed. Within this site's base, `/blog/`, the three old article URLs, `/about/` and `/cv/` have static redirects to their replacements. Redirects use HTML refresh because GitHub Pages does not support server-side redirects.
+The old, incorrect `/thpt-2026/` hardcoding has been removed. Within this site's base, `/blog/`, the old article URLs, `/about/` and `/cv/` have static redirects to their replacements or the research index. Redirects use HTML refresh because GitHub Pages does not support server-side redirects.
 
 The existing GitHub Pages workflow deploys pushes to `main`; enable **GitHub Actions** as the Pages source in repository settings. Pull requests run checks and a build without deploying.
 
