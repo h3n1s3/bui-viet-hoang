@@ -121,4 +121,11 @@ export const projects: Project[] = [
     tags: ['Astro', 'TypeScript', 'Markdown'],
     url: 'https://github.com/h3n1s3/bui-viet-hoang',
   },
+  {
+    id: 'PR-002',
+    title: 'KMA miniCTF 2026 — Web CTF Challenges',
+    description: 'Designed and built three web security challenges for KMA miniCTF 2026: Simple Note, DNS Guard and Legend Portal.',
+    tags: ['CTF', 'Web Security', 'Docker'],
+    url: 'https://github.com/h3n1s3/web-ctf-challenges',
+  },
 ];
