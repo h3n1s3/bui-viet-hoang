@@ -102,6 +102,7 @@ export const securityAchievements: SecurityAchievement[] = [
 
 export type CtfAchievement = {
   title: string;
+  result?: string;
   description: string;
   date?: string;
   dateLabel?: string;
@@ -110,7 +111,29 @@ export type CtfAchievement = {
 };
 
 // Add verified competition results and milestones here.
-export const ctfAchievements: CtfAchievement[] = [];
+export const ctfAchievements: CtfAchievement[] = [
+  {
+    title: 'KMACTF Season 1',
+    result: 'CONSOLATION PRIZE',
+    description: 'Awarded a consolation prize in the first KMACTF competition.',
+    url: 'https://www.facebook.com/share/p/1ErDoE34T7/',
+    linkLabel: 'View announcement',
+  },
+  {
+    title: 'KMACTF Season 2',
+    result: 'CONSOLATION PRIZE',
+    description: 'Awarded a consolation prize in the second KMACTF competition.',
+    url: 'https://www.facebook.com/share/p/1J8zCM6NrL/',
+    linkLabel: 'View announcement',
+  },
+  {
+    title: 'Digital Dragons',
+    result: 'GRAND FINALIST',
+    description: 'Reached the grand final of the Digital Dragons competition.',
+    url: 'https://www.facebook.com/share/p/19mmC4u8Hp/',
+    linkLabel: 'View announcement',
+  },
+];
 
 export type Project = { id: string; title: string; description: string; tags: string[]; url: string };
 export const projects: Project[] = [

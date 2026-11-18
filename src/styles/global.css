@@ -81,7 +81,7 @@ h1, h2, h3, h4 { font-weight: 400; }
   z-index: 1;
 }
 ::view-transition-new(root) {
-  animation: theme-reveal 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: theme-reveal 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
   clip-path: circle(0px at var(--theme-x, 50%) var(--theme-y, 50%));
   mix-blend-mode: normal;
   z-index: 2;
@@ -472,6 +472,17 @@ h1, h2, h3, h4 { font-weight: 400; }
 .achievement-entry h4{font:25px/1.5 var(--pixel);margin-top:18px;}
 .achievement-entry p,.ctf-note{font:15px/1.9 var(--sans);color:var(--muted);margin-top:14px;}
 .achievement-entry .achievement-credit {font-size:12px;color:var(--subtle);}
+.ctf-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:28px;}
+.ctf-card {display:flex;flex-direction:column;min-height:210px;padding:20px 20px 22px;border:1px solid var(--line);border-top:2px solid var(--accent-border);border-radius:8px;background:var(--surface);transition:border-color 180ms ease,background-color 180ms ease,transform 180ms ease;}
+.ctf-card:hover {border-color:var(--accent);background:var(--hover-bg);transform:translateY(-3px);}
+.ctf-card-top {display:flex;align-items:center;flex-wrap:wrap;gap:10px;font:10px/1.5 var(--mono);color:var(--subtle);}
+.ctf-index {color:var(--accent);letter-spacing:.8px;}
+.ctf-result {padding:4px 7px;border:1px solid var(--accent-border);color:var(--accent);font-size:9px;letter-spacing:.8px;}
+.ctf-card h4 {font:22px/1.4 var(--pixel);margin-top:18px;}
+.ctf-card p {flex:1;font:14px/1.7 var(--sans);color:var(--muted);margin-top:10px;}
+.ctf-card .text-link {margin-top:18px;font-size:12px;}
+.ctf-profile-link {display:inline-block;margin-top:20px;}
+@media(max-width:900px){.ctf-grid{grid-template-columns:1fr;}.ctf-card{min-height:0;}}
 .hero-expanded {grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);padding-top:8px;}
 .elaina-art {height:clamp(730px,calc(100svh - 95px),1120px);overflow:visible;}
 .elaina-art svg {width:100%;height:calc(100% - 25px);}
