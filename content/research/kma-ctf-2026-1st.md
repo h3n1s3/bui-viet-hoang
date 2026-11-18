@@ -6,8 +6,6 @@ description: "Writeup for the KMA CTF 2026 1ST web challenges, covering ChatGPT 
 tags: [CTF]
 category: writeup
 lang: vi
-cover: /research/kma-ctf-2026-1st/B1z3ZExefg.png
-coverAlt: "Screenshot from KMA CTF 2026 1ST"
 ---
 ## Part 1
 

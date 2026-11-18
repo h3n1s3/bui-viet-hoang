@@ -6,8 +6,6 @@ description: "Writeup for the KCSC CSCV 2026 web challenges, covering SSRF, uplo
 tags: [CTF]
 category: writeup
 lang: vi
-cover: /research/kcsc-cscv-2026/H1jQ5EJvfl.png
-coverAlt: "Screenshot from KCSC CSCV 2026"
 ---
 ## Previewer
 ### Overview

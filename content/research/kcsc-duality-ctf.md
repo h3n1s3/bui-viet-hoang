@@ -6,8 +6,6 @@ description: "Writeup for KCSC Duality CTF, covering KCSC OS, KCSC-Sandbox, Pape
 tags: [CTF]
 category: writeup
 lang: vi
-cover: /research/kcsc-duality-ctf/SJup0No6-e.png
-coverAlt: "Screenshot from KCSC DUALITY CTF"
 ---
 ### KCSC OS
 #### Phân tích

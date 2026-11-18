@@ -6,8 +6,6 @@ description: "Writeup for the KMACTF 2026 II web challenges, covering SHOP, KBB 
 tags: [CTF]
 category: writeup
 lang: vi
-cover: /research/kmactf-2026-ii/BkW-Kh7tzl.png
-coverAlt: "Screenshot from KMACTF 2026 II"
 ---
 ## SHOP
 ### Phân tích

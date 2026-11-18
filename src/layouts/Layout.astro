@@ -56,20 +56,51 @@ const navigation = [{ label: 'Home', path: '', key: 'home' }, { label: 'Research
   </body>
 </html>
 <script>
+  type ViewTransitionDocument = Document & {
+    startViewTransition?: (callback: () => void | Promise<void>) => {
+      ready: Promise<void>;
+      finished: Promise<void>;
+    };
+  };
+  const root = document.documentElement;
   const toggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
   if (toggle) {
     toggle.hidden = false;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let transitioning = false;
     const syncTheme = () => {
-      const light = document.documentElement.dataset.theme === 'light';
+      const light = root.dataset.theme === 'light';
       toggle.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
       document.querySelector('meta[name="theme-color"]')?.setAttribute('content', light ? '#f6f6f0' : '#000000');
     };
-    syncTheme();
-    toggle.addEventListener('click', () => {
-      const theme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-      document.documentElement.dataset.theme = theme;
+    const applyTheme = (theme: 'dark' | 'light') => {
+      root.dataset.theme = theme;
       try { localStorage.setItem('color-theme', theme); } catch {}
       syncTheme();
+    };
+    const revealTheme = (theme: 'dark' | 'light', x: number, y: number) => {
+      const startViewTransition = (document as ViewTransitionDocument).startViewTransition;
+      if (!startViewTransition || reduceMotion.matches) {
+        applyTheme(theme);
+        return;
+      }
+      if (transitioning) return;
+      transitioning = true;
+      const radius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y),
+      );
+      root.style.setProperty('--theme-x', `${x}px`);
+      root.style.setProperty('--theme-y', `${y}px`);
+      root.style.setProperty('--theme-radius', `${radius}px`);
+      const transition = startViewTransition.call(document, () => applyTheme(theme));
+      transition.finished.catch(() => {}).finally(() => { transitioning = false; });
+    };
+    syncTheme();
+    toggle.addEventListener('click', () => {
+      const theme = root.dataset.theme === 'light' ? 'dark' : 'light';
+      const rect = toggle.getBoundingClientRect();
+      revealTheme(theme, rect.left + rect.width / 2, rect.top + rect.height / 2);
     });
   }
 </script>
