@@ -22,9 +22,9 @@
   --hover-bg: #070e05;
   --binary: #102708;
   --titlebar: #ececec;
-  --pixel: 'VCR OSD Neue', 'VT323', monospace;
-  --mono: 'JetBrains Mono Variable', monospace;
-  --sans: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --pixel: 'VCR OSD Neue', 'VT323', 'Inter Variable', 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'DejaVu Sans', monospace;
+  --mono: 'JetBrains Mono Variable', 'Inter Variable', 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'DejaVu Sans', monospace;
+  --sans: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'DejaVu Sans', sans-serif;
   font-family: var(--sans);
   font-synthesis: none;
   background: var(--bg);
